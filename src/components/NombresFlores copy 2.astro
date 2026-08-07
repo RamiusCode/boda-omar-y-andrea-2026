@@ -1,0 +1,244 @@
+---
+// NombresFlores.astro
+---
+
+<section id="seccion-nombres" class="relative w-full overflow-hidden">
+
+    <!-- FLOR DECORATIVA DERECHA -->
+    <img
+        src="/imagenes/florcostado.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute top-1/2 right-0 w-40 pointer-events-none select-none opacity-30 scale-x-[-1] -translate-y-1/2 z-[-1]"
+    />
+    <!-- FOTO PRINCIPAL DE LOS NOVIOS -->
+    <div id="foto-container" class="relative w-full overflow-hidden h-[62vh]">
+        <img
+            id="foto-novios"
+            src="/imagenes/principal.png"
+            alt="Wilbert y Yillda"
+            class="absolute inset-0 w-full h-full object-cover object-top"
+        />
+
+        <!-- ONDAS — 3 capas de la misma onda en distintas posiciones -->
+
+        <!-- Capa 3 (atrás) — espuma alta, muy transparente, espejada -->
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 28"
+            preserveAspectRatio="none"
+            class="absolute left-0 w-full z-10 pointer-events-none scale-x-[-1]"
+            style="bottom: 10px; height: 28px;"
+        >
+            <path
+                d="M0,28 L0,14 C120,6 240,6 360,12 C480,18 600,19 720,14 C840,9 960,7 1080,12 C1200,17 1320,18 1440,13 L1440,28 Z"
+                fill="rgba(244,240,230,0.18)"></path>
+        </svg>
+
+        <!-- Capa 2 (media) — espuma media -->
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 28"
+            preserveAspectRatio="none"
+            class="absolute left-0 w-full z-10 pointer-events-none"
+            style="bottom: 5px; height: 28px;"
+        >
+            <path
+                d="M0,28 L0,14 C120,6 240,6 360,12 C480,18 600,19 720,14 C840,9 960,7 1080,12 C1200,17 1320,18 1440,13 L1440,28 Z"
+                fill="rgba(244,240,230,0.35)"></path>
+        </svg>
+
+        <!-- Capa 1 (frente) — espuma translúcida sobre la foto (NO la corta, NO tapa con blanco) -->
+        <div
+            class="absolute bottom-0 left-0 w-full z-10 pointer-events-none"
+            style="height: 28px;"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1440 28"
+                preserveAspectRatio="none"
+                class="w-full h-full block"
+            >
+                <path
+                    d="M0,28 L0,14 C120,6 240,6 360,12 C480,18 600,19 720,14 C840,9 960,7 1080,12 C1200,17 1320,18 1440,13 L1440,28 Z"
+                    fill="rgba(244,240,230,0.50)"></path>
+            </svg>
+        </div>
+
+        <!-- ESPUMA dorada — trazo sutil sobre la cresta de la capa 1 -->
+        <div
+            class="absolute bottom-0 left-0 w-full z-20 pointer-events-none"
+            style="height: 28px;"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1440 28"
+                preserveAspectRatio="none"
+                class="w-full h-full block"
+            >
+                <path
+                    d="M0,14 C120,6 240,6 360,12 C480,18 600,19 720,14 C840,9 960,7 1080,12 C1200,17 1320,18 1440,13"
+                    fill="none"
+                    stroke="rgba(185,138,147,0.55)"
+                    stroke-width="1.4"
+                    vector-effect="non-scaling-stroke"></path>
+            </svg>
+        </div>
+    </div>
+
+    <!-- TEXTO: ¡NOS CASAMOS! + NOMBRES + ANILLOS -->
+    <div
+        id="texto-nombres"
+        class="text-center px-6 pt-1 pb-2 flex flex-col items-center"
+    >
+        <p
+            class="font-cormorant uppercase tracking-[0.35em] text-sm font-semibold"
+            style="color: #8E2334;"
+        >
+            ¡NOS CASAMOS!
+        </p>
+
+        <h2
+            class="font-romantic mt-7 leading-tight whitespace-nowrap"
+            style="color: #6E1B2B; font-size: 2.1rem;"
+        >
+            Wilbert y Yillda
+        </h2>
+
+        <!-- Imagen anillo con filtro vino -->
+        <img
+            src="/imagenes/anillo.png"
+            alt="Anillos de boda"
+            class="w-12 mt-5 mx-auto anillo-oro"
+        />
+    </div>
+</section>
+
+<!-- BOTÓN FLOTANTE PLAY/PAUSE -->
+<button
+    id="btn-audio-control"
+    aria-label="Controlar música"
+    class="fixed bottom-6 right-6 z-[9999] w-12 h-12 rounded-full shadow-lg
+           flex items-center justify-center
+           transition-all duration-300 hover:scale-110 active:scale-95"
+    style="opacity: 0; pointer-events: none; background-color: #F7EFEA; border: 1.5px solid #3F0F1A;"
+>
+    <svg
+        id="icono-pause"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-5 h-5"
+        viewBox="0 0 24 24"
+        fill="#3F0F1A"
+    >
+        <rect x="6" y="4" width="4" height="16" rx="1"></rect>
+        <rect x="14" y="4" width="4" height="16" rx="1"></rect>
+    </svg>
+    <svg
+        id="icono-play"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-5 h-5 hidden"
+        viewBox="0 0 24 24"
+        fill="#3F0F1A"
+    >
+        <path d="M8 5v14l11-7z"></path>
+    </svg>
+</button>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // FOTO - aparece con leve zoom out
+        gsap.fromTo(
+            "#foto-novios",
+            { opacity: 0, scale: 1.06 },
+            {
+                opacity: 1,
+                scale: 1,
+                duration: 1.5,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#foto-container",
+                    start: "top 85%",
+                    toggleActions: "play none none reset",
+                },
+            },
+        );
+
+        // TEXTO - sube suavemente
+        gsap.fromTo(
+            "#texto-nombres",
+            { opacity: 0, y: 28 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power2.out",
+                delay: 0.4,
+                scrollTrigger: {
+                    trigger: "#texto-nombres",
+                    start: "top 92%",
+                    toggleActions: "play none none reset",
+                },
+            },
+        );
+
+        // BOTÓN FLOTANTE PLAY/PAUSE
+        const btnAudio = document.getElementById(
+            "btn-audio-control",
+        ) as HTMLButtonElement;
+        const iconoPlay = document.getElementById("icono-play");
+        const iconoPause = document.getElementById("icono-pause");
+
+        const intervalo = setInterval(() => {
+            const audio = (window as any).audioGlobal;
+            if (audio) {
+                clearInterval(intervalo);
+                gsap.to(btnAudio, {
+                    opacity: 1,
+                    duration: 0.5,
+                    ease: "power2.out",
+                    onStart: () => {
+                        btnAudio.style.pointerEvents = "auto";
+                    },
+                });
+                iconoPlay?.classList.add("hidden");
+                iconoPause?.classList.remove("hidden");
+
+                btnAudio.addEventListener("click", () => {
+                    const audioActual = (window as any).audioGlobal;
+                    const reproduciendo = (window as any)
+                        .estaReproduciendoGlobal;
+                    if (!audioActual) return;
+                    if (reproduciendo) {
+                        audioActual.pause();
+                        (window as any).estaReproduciendoGlobal = false;
+                        iconoPause?.classList.add("hidden");
+                        iconoPlay?.classList.remove("hidden");
+                    } else {
+                        audioActual.play();
+                        (window as any).estaReproduciendoGlobal = true;
+                        iconoPlay?.classList.add("hidden");
+                        iconoPause?.classList.remove("hidden");
+                    }
+                    gsap.fromTo(
+                        btnAudio,
+                        { scale: 0.85 },
+                        { scale: 1, duration: 0.3, ease: "back.out(2)" },
+                    );
+                });
+            }
+        }, 300);
+    });
+</script>
+
+<style>
+    /* Filtro para colorizar el icono de anillos en oro #B08A3C */
+    .anillo-oro {
+        filter: brightness(0) saturate(100%) invert(46%) sepia(92%)
+            saturate(289%) hue-rotate(2deg) brightness(101%) contrast(91%);
+    }
+</style>

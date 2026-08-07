@@ -1,0 +1,98 @@
+---
+// Puntual.astro
+---
+
+<section
+    id="puntual"
+    class="relative w-full py-10 px-6 overflow-hidden isolate"
+>
+    <!-- FLOR DECORATIVA DERECHA -->
+    <img
+        src="/imagenes/florcostado.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute top-1/2 right-0 w-24 pointer-events-none select-none scale-x-[-1] -translate-y-1/2 z-[-1]"
+    />
+
+    <div
+        id="card-puntual"
+        class="relative bg-white rounded-3xl shadow-xl px-7 py-9 text-center max-w-xs mx-auto"
+    >
+        <!-- Marco vino interior -->
+        <div
+            class="pointer-events-none absolute inset-3 rounded-2xl border"
+            style="border-color: rgba(185,138,147,0.4);"
+        >
+        </div>
+
+        <div class="relative">
+        <!-- ICONO RESTRICCIÓN -->
+        <img
+            src="/imagenes/restriccion.png"
+            alt="Solo adultos"
+            class="w-14 h-14 mx-auto icono-vino"
+        />
+
+        <!-- TÍTULO -->
+        <p
+            class="font-romantic text-3xl leading-tight mt-3 titulo-dorado"
+        >
+            Solo Adultos
+        </p>
+
+        <!-- DIVISOR con rombo vino -->
+        <div class="flex items-center justify-center gap-2 mt-3">
+            <span
+                class="h-px w-10"
+                style="background-color: rgba(185,138,147,0.6);"></span>
+            <span class="w-1.5 h-1.5 rotate-45 rombo-oro"></span>
+            <span
+                class="h-px w-10"
+                style="background-color: rgba(185,138,147,0.6);"></span>
+        </div>
+
+        <!-- TEXTO -->
+        <p
+            class="font-cormorant text-xl text-[#5E1A26] mt-5 leading-relaxed"
+        >
+            Amamos a sus pequeños con todo el corazón, pero hemos pensado esta
+            celebración como una velada especial solo para adultos. Esperamos
+            que comprendan y aprovechen para disfrutar de una noche libre,
+            bailar y festejar con nosotros.
+            <br /> ¡Gracias de corazón por su comprensión!
+        </p>
+        </div>
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        gsap.fromTo(
+            "#card-puntual",
+            { opacity: 0, y: 28 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#puntual",
+                    start: "top 82%",
+                    toggleActions: "play none none reset",
+                },
+            },
+        );
+    });
+</script>
+
+<style>
+    .icono-vino {
+        filter: brightness(0) saturate(100%) invert(13%) sepia(94%)
+            saturate(1565%) hue-rotate(324deg) brightness(92%) contrast(95%);
+    }
+</style>

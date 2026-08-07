@@ -1,0 +1,218 @@
+---
+// Fecha.astro
+---
+
+<section
+    id="fecha-boda"
+    class="relative w-full pt-2 pb-12 px-6 text-center overflow-hidden"
+>
+    <!-- HOJA DECORATIVA FONDO -->
+    <img
+        src="/imagenes/textura2.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute bottom-4 left-0 w-52 pointer-events-none select-none opacity-[0.06]"
+    />
+
+    <!-- FRASE SUPERIOR -->
+    <p class="font-upcil uppercase text-2xl text-[#8E2334] leading-[1.1]">
+        Queremos que nos<br />acompañes en nuestro día
+    </p>
+
+    <!-- FILA FECHA: [Mayo 2026 entre líneas] | [30] | [10:00 a.m. entre líneas] -->
+    <div class="flex items-center justify-center gap-4 mt-8 px-2">
+        <!-- Mayo 2026 con línea arriba y abajo -->
+        <div class="flex flex-col items-center flex-1 gap-1">
+            <div class="h-px w-full bg-[#B98A93] opacity-60"></div>
+            <span
+                class="font-cormorant text-2xl text-[#5E1A26] py-1 whitespace-nowrap"
+            >
+                Mayo 2026
+            </span>
+            <div class="h-px w-full bg-[#B98A93] opacity-60"></div>
+        </div>
+
+        <!-- Caja del número día -->
+        <div
+            class="bg-white rounded-2xl px-5 py-3 shadow-md border border-[#B98A93] flex-shrink-0"
+        >
+            <span
+                class="font-charm font-bold text-6xl text-[#8E2334] leading-none"
+                >30</span
+            >
+        </div>
+
+        <!-- 10:00 a.m. con línea arriba y abajo -->
+        <div class="flex flex-col items-center flex-1 gap-1">
+            <div class="h-px w-full bg-[#B98A93] opacity-60"></div>
+            <span
+                class="font-cormorant text-2xl text-[#5E1A26] py-1 whitespace-nowrap"
+            >
+                10:00 a.m.
+            </span>
+            <div class="h-px w-full bg-[#B98A93] opacity-60"></div>
+        </div>
+    </div>
+
+    <!-- DÍA DE LA SEMANA -->
+    <p class="font-cormorant uppercase text-xl text-[#5E1A26] mt-5">Sábado</p>
+
+    <!-- ICONO CALENDARIO CON CORAZÓN -->
+    <div class="flex justify-center mt-4">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 42 42"
+            fill="none"
+            class="w-10 h-10"
+        >
+            <rect
+                x="3"
+                y="8"
+                width="36"
+                height="30"
+                rx="5"
+                stroke="#B98A93"
+                stroke-width="1.4"></rect>
+            <line
+                x1="3"
+                y1="17"
+                x2="39"
+                y2="17"
+                stroke="#B98A93"
+                stroke-width="1.4"></line>
+            <line
+                x1="13"
+                y1="3"
+                x2="13"
+                y2="12"
+                stroke="#B98A93"
+                stroke-width="1.6"
+                stroke-linecap="round"></line>
+            <line
+                x1="29"
+                y1="3"
+                x2="29"
+                y2="12"
+                stroke="#B98A93"
+                stroke-width="1.6"
+                stroke-linecap="round"></line>
+            <path
+                d="M21 31 C21 31 14.5 26.8 14.5 23 C14.5 21.1 16 20 17.8 20 C19.2 20 20.3 20.8 21 22 C21.7 20.8 22.8 20 24.2 20 C26 20 27.5 21.1 27.5 23 C27.5 26.8 21 31 21 31Z"
+                fill="#8E2334"></path>
+        </svg>
+    </div>
+
+    <!-- ESPACIO antes de Faltan -->
+    <div class="mt-10"></div>
+
+    <!-- FALTAN -->
+    <p class="font-romantic text-4xl text-[#6E1B2B] leading-none">Faltan</p>
+
+    <!-- CARD DEL CONTADOR -->
+    <div
+        class="mt-5 mx-2 bg-white/80 rounded-2xl py-5 px-4 shadow-sm border border-[#E8D5D5]"
+    >
+        <div class="flex justify-around">
+            <div class="flex flex-col items-center">
+                <span
+                    id="countdown-days"
+                    class="font-charm font-bold text-4xl text-[#8E2334] leading-none"
+                    >00</span
+                >
+                <span class="font-cormorant text-base text-[#6E1B2B] mt-1"
+                    >Días</span
+                >
+            </div>
+
+            <div class="flex flex-col items-center">
+                <span
+                    id="countdown-hours"
+                    class="font-charm font-bold text-4xl text-[#8E2334] leading-none"
+                    >00</span
+                >
+                <span class="font-cormorant text-sm text-[#6E1B2B] mt-1"
+                    >Hrs.</span
+                >
+            </div>
+
+            <div class="flex flex-col items-center">
+                <span
+                    id="countdown-minutes"
+                    class="font-charm font-bold text-4xl text-[#8E2334] leading-none"
+                    >00</span
+                >
+                <span class="font-cormorant text-sm text-[#6E1B2B] mt-1"
+                    >Min.</span
+                >
+            </div>
+
+            <div class="flex flex-col items-center">
+                <span
+                    id="countdown-seconds"
+                    class="font-charm font-bold text-4xl text-[#8E2334] leading-none"
+                    >00</span
+                >
+                <span class="font-cormorant text-sm text-[#6E1B2B] mt-1"
+                    >S.</span
+                >
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ── FECHA DE LA BODA (ajustar aquí) ──────
+    const FECHA_BODA = new Date("2026-05-30T10:00:00");
+    // ──────────────────────────────────────────
+
+    function pad(n: number): string {
+        return String(n).padStart(2, "0");
+    }
+
+    function actualizar() {
+        const diff = FECHA_BODA.getTime() - Date.now();
+
+        const dEl = document.getElementById("countdown-days");
+        const hEl = document.getElementById("countdown-hours");
+        const mEl = document.getElementById("countdown-minutes");
+        const sEl = document.getElementById("countdown-seconds");
+
+        if (diff <= 0) {
+            [dEl, hEl, mEl, sEl].forEach((el) => {
+                if (el) el.textContent = "00";
+            });
+            return;
+        }
+
+        if (dEl) dEl.textContent = pad(Math.floor(diff / 86400000));
+        if (hEl) hEl.textContent = pad(Math.floor((diff % 86400000) / 3600000));
+        if (mEl) mEl.textContent = pad(Math.floor((diff % 3600000) / 60000));
+        if (sEl) sEl.textContent = pad(Math.floor((diff % 60000) / 1000));
+    }
+
+    actualizar();
+    setInterval(actualizar, 1000);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        gsap.fromTo(
+            "#fecha-boda",
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1.3,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#fecha-boda",
+                    start: "top 82%",
+                    toggleActions: "play none none reset",
+                },
+            },
+        );
+    });
+</script>

@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+
+
+
+/* ═══════════════════════════════════════════════════════════ */
+/* 🔤 FUENTES PERSONALIZADAS - Cormorant SC                    */
+/* ═══════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'Cormorant SC';
+  src: url('/fonts/CormorantSC-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cormorant SC';
+  src: url('/fonts/CormorantSC-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cormorant SC';
+  src: url('/fonts/CormorantSC-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cormorant SC';
+  src: url('/fonts/CormorantSC-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cormorant SC';
+  src: url('/fonts/CormorantSC-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+
+
+
+
+
+
+
+@font-face {
+  font-family: 'Romantic Lovely';
+  src: url('/fonts/Romantic Lovely.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Upcii';
+  src: url('/fonts/upcii.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Upcil';
+  src: url('/fonts/upcil.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Para el nombre */
+.font-great-vibes {
+  font-family: 'Great Vibes', cursive !important;
+}
+
+/* Para nombres con Romantic Lovely */
+.font-romantic {
+  font-family: 'Romantic Lovely', cursive !important;
+}
+
+/* Para títulos con Upcii */
+.font-upcii {
+  font-family: 'Upcii', serif !important;
+}
+
+/* Para títulos con Upcil */
+.font-upcil {
+  font-family: 'Upcil', serif !important;
+}
+
+/* Para mis XV años */
+.font-crimson {
+  font-family: 'Crimson Text', serif !important;
+}
+
+/* Para dedicatoria*/
+.font-cormorant {
+  font-family: 'Cormorant Garamond', serif !important;
+}
+
+/*Para texto con Charm */
+.font-charm {
+  font-family: 'Charm', cursive !important;
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* 🥇 PALETA DORADO + VINO                                     */
+/* ═══════════════════════════════════════════════════════════ */
+
+/*
+  ORO CHAMPAGNE — dorado apagado y cálido, del tipo "foil" impreso.
+  Baja saturación para que no lea como mostaza y para que
+  conviva con el vino sin competir con él.
+*/
+/*
+  Dorado PLANO. Sin degradados, sin sombras, sin contornos.
+  Un solo tono para toda la invitación.
+*/
+:root {
+  --oro: #b08a3c;
+  /* dorado sobre fondo blanco */
+  --oro-claro: #d4b473;
+  /* dorado sobre fondo vino    */
+}
+
+/* Títulos principales (fondo blanco) */
+.titulo-dorado {
+  color: #b08a3c;
+}
+
+/* Títulos sobre fondo vino — tono más claro para que resalte */
+.titulo-oro-claro {
+  color: #d4b473;
+}
+
+/* Mismo dorado, se conserva por compatibilidad */
+.dorado-solido {
+  color: #b08a3c;
+}
+
+/* Textos y etiquetas secundarias */
+.texto-oro {
+  color: #b08a3c !important;
+}
+
+/* Filete dorado (divisor decorativo) */
+.filete-oro {
+  display: block;
+  height: 1px;
+  background-color: #b08a3c;
+}
+
+/* Rombo dorado del divisor */
+.rombo-oro {
+  background-color: #b08a3c;
+}
