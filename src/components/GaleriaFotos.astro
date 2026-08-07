@@ -50,8 +50,8 @@ const carrusel = [...fotos, ...fotos];
         Nuestra historia en imágenes
     </p>
 
-    <!-- CARRUSEL AUTOMÁTICO -->
-    <div class="galeria-marquee relative w-full overflow-hidden">
+    <!-- CARRUSEL AUTOMÁTICO + ARRASTRABLE CON EL DEDO / MOUSE -->
+    <div class="relative w-full">
         <!-- Degradados laterales para que las fotos entren/salgan suaves -->
         <div
             class="absolute inset-y-0 left-0 w-14 z-10 pointer-events-none"
@@ -64,24 +64,27 @@ const carrusel = [...fotos, ...fotos];
         >
         </div>
 
-        <div class="galeria-track flex gap-3 w-max px-3">
-            {
-                carrusel.map((src, i) => (
-                    <div class="shrink-0 w-44">
-                        <div class="bg-white p-1.5 rounded-2xl shadow-md">
-                            <div class="overflow-hidden rounded-xl">
-                                <img
-                                    src={src}
-                                    alt={`Foto ${(i % fotos.length) + 1}`}
-                                    loading="lazy"
-                                    decoding="async"
-                                    class="w-full h-56 object-cover block"
-                                />
+        <div class="galeria-marquee w-full">
+            <div class="galeria-track flex gap-3 w-max px-3">
+                {
+                    carrusel.map((src, i) => (
+                        <div class="shrink-0 w-44">
+                            <div class="bg-white p-1.5 rounded-2xl shadow-md">
+                                <div class="overflow-hidden rounded-xl">
+                                    <img
+                                        src={src}
+                                        alt={`Foto ${(i % fotos.length) + 1}`}
+                                        loading="lazy"
+                                        decoding="async"
+                                        draggable="false"
+                                        class="w-full h-56 object-cover block select-none pointer-events-none"
+                                    />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))
-            }
+                    ))
+                }
+            </div>
         </div>
     </div>
 
@@ -200,6 +203,110 @@ const carrusel = [...fotos, ...fotos];
             },
         );
 
+        // ── CARRUSEL: avance automático + arrastre manual ──
+        const viewport = document.querySelector<HTMLElement>(".galeria-marquee");
+        const track = document.querySelector<HTMLElement>(".galeria-track");
+
+        if (viewport && track) {
+            const sinMovimiento = window.matchMedia(
+                "(prefers-reduced-motion: reduce)",
+            ).matches;
+
+            const VELOCIDAD = 22; // px por segundo del avance automático
+            const ESPERA = 700; // ms de pausa tras soltar antes de reanudar
+
+            let mitad = 0; // ancho de un set completo de fotos
+            let posicion = 0; // px desplazados (siempre dentro de [0, mitad))
+            const medir = () => {
+                mitad = track.scrollWidth / 2;
+            };
+            medir();
+            window.addEventListener("resize", medir);
+            window.addEventListener("load", medir);
+
+            // Bucle infinito en ambos sentidos: el módulo evita cualquier tope,
+            // así se puede arrastrar hacia atrás indefinidamente
+            const pintar = () => {
+                if (mitad > 0) {
+                    posicion = ((posicion % mitad) + mitad) % mitad;
+                }
+                track.style.transform = `translate3d(${-posicion}px,0,0)`;
+            };
+
+            let arrastrando = false;
+            let enHover = false;
+            let inercia = 0; // px/s residuales al soltar
+            let reanudarEn = 0;
+            let ultimoX = 0;
+            let ultimoT = 0;
+            let anterior = performance.now();
+
+            const bucle = (ahora: number) => {
+                const dt = Math.min((ahora - anterior) / 1000, 0.05);
+                anterior = ahora;
+
+                if (!arrastrando) {
+                    if (Math.abs(inercia) > 2) {
+                        posicion += inercia * dt;
+                        inercia *= Math.pow(0.004, dt); // frenado suave
+                        pintar();
+                    } else if (
+                        !enHover &&
+                        !sinMovimiento &&
+                        ahora >= reanudarEn
+                    ) {
+                        // Retoma justo desde donde quedó la foto
+                        posicion += VELOCIDAD * dt;
+                        pintar();
+                    }
+                }
+                requestAnimationFrame(bucle);
+            };
+            requestAnimationFrame(bucle);
+
+            viewport.addEventListener("pointerdown", (e) => {
+                arrastrando = true;
+                inercia = 0;
+                ultimoX = e.clientX;
+                ultimoT = performance.now();
+                viewport.setPointerCapture(e.pointerId);
+                viewport.classList.add("arrastrando");
+            });
+
+            viewport.addEventListener("pointermove", (e) => {
+                if (!arrastrando) return;
+                const ahora = performance.now();
+                const dx = e.clientX - ultimoX;
+                const dt = (ahora - ultimoT) / 1000;
+
+                posicion -= dx; // arrastrar a la derecha → retrocede
+                pintar();
+
+                if (dt > 0) {
+                    // velocidad instantánea suavizada, para la inercia al soltar
+                    const v = -dx / dt;
+                    inercia = inercia * 0.7 + v * 0.3;
+                }
+                ultimoX = e.clientX;
+                ultimoT = ahora;
+            });
+
+            const soltar = () => {
+                if (!arrastrando) return;
+                arrastrando = false;
+                viewport.classList.remove("arrastrando");
+                inercia = Math.max(-2600, Math.min(2600, inercia));
+                reanudarEn = performance.now() + ESPERA;
+            };
+
+            viewport.addEventListener("pointerup", soltar);
+            viewport.addEventListener("pointercancel", soltar);
+            viewport.addEventListener("lostpointercapture", soltar);
+            viewport.addEventListener("mouseenter", () => (enHover = true));
+            viewport.addEventListener("mouseleave", () => (enHover = false));
+            viewport.addEventListener("dragstart", (e) => e.preventDefault());
+        }
+
         // ── MODAL: abrir / cerrar ──
         const modal = document.getElementById("galeria-modal");
         const btnVer = document.getElementById("btn-ver-galeria");
@@ -254,30 +361,20 @@ const carrusel = [...fotos, ...fotos];
 </script>
 
 <style>
-    /* Carrusel infinito hacia la izquierda */
+    /* Carrusel: la pista se mueve por transform desde JS (auto + arrastre) */
+    .galeria-marquee {
+        overflow: hidden;
+        /* El gesto horizontal lo manejamos nosotros; el vertical sigue
+           desplazando la página con normalidad */
+        touch-action: pan-y;
+        cursor: grab;
+    }
+    .galeria-marquee.arrastrando {
+        cursor: grabbing;
+    }
     .galeria-track {
-        /* 10 fotos: la pista mide 2.5x más que con 4, así que la duración
-           sube en la misma proporción para conservar la velocidad */
-        animation: galeria-scroll 88s linear infinite;
         will-change: transform;
-    }
-    /* Pausa al pasar el cursor / mantener presionado */
-    .galeria-marquee:hover .galeria-track,
-    .galeria-marquee:active .galeria-track {
-        animation-play-state: paused;
-    }
-    @keyframes galeria-scroll {
-        from {
-            transform: translateX(0);
-        }
-        to {
-            /* Se mueve exactamente la mitad (un set completo) → bucle perfecto */
-            transform: translateX(-50%);
-        }
-    }
-    @media (prefers-reduced-motion: reduce) {
-        .galeria-track {
-            animation: none;
-        }
+        user-select: none;
+        -webkit-user-select: none;
     }
 </style>
