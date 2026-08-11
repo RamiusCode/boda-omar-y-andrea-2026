@@ -1,0 +1,80 @@
+---
+// DireccionCeremonia.astro
+---
+
+<section id="direccion-ceremonia" class="relative w-full py-10 px-6">
+    <div class="flex flex-col gap-6 max-w-xs mx-auto">
+        <!-- CARD CEREMONIA RELIGIOSA -->
+        <div
+            id="card-ceremonia"
+            class="bg-white rounded-3xl shadow-lg p-6 text-center"
+        >
+            <img
+                src="/imagenes/iglesia.png"
+                alt="Iglesia"
+                class="w-14 h-14 mx-auto icono-vino"
+            />
+
+            <p
+                class="font-romantic text-[1.75rem] text-[#6E1B2B] leading-snug mt-2"
+            >
+                Ceremonia Religiosa
+            </p>
+
+            <p
+                class="font-charm font-bold text-3xl text-[#8E2334] mt-2 leading-none"
+            >
+                10:30
+            </p>
+
+            <p
+                class="font-cormorant uppercase text-base text-[#5E1A26] mt-3 leading-relaxed tracking-[0.1em]"
+            >
+                Iglesia del Nazareno<br />16 de Julio
+            </p>
+
+            <a
+                href="https://maps.app.goo.gl/3iU335xizhouWwZx5"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block mt-5 py-2 px-6 rounded-full font-cormorant uppercase text-xs tracking-widest text-white bg-[#6E1B2B] hover:opacity-80 transition-opacity"
+            >
+                Ver Ubicación
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        gsap.fromTo(
+            "#card-ceremonia",
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#direccion-ceremonia",
+                    start: "top 82%",
+                    toggleActions: "play none none reset",
+                },
+            },
+        );
+
+    });
+</script>
+
+<style>
+    .icono-vino {
+        filter: brightness(0) saturate(100%) invert(13%) sepia(94%)
+            saturate(1565%) hue-rotate(324deg) brightness(92%) contrast(95%);
+    }
+</style>

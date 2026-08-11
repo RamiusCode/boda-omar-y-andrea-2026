@@ -1,0 +1,94 @@
+---
+// Puntual.astro
+---
+
+<section
+    id="puntual"
+    class="relative w-full py-10 px-6 overflow-hidden isolate"
+>
+    <div
+        id="card-puntual"
+        class="relative bg-white rounded-3xl shadow-xl p-8 sm:p-10 text-center max-w-md mx-auto"
+    >
+        <!-- RAMO SOBRE LA ESQUINA SUPERIOR IZQUIERDA -->
+        <img
+            src="/imagenes/flrocard.webp"
+            alt=""
+            aria-hidden="true"
+            width="165"
+            height="328"
+            loading="lazy"
+            decoding="async"
+            class="absolute -top-6 -left-12 w-20 sm:w-24 pointer-events-none select-none z-20"
+        />
+
+        <!-- RAMO SOBRE LA ESQUINA INFERIOR DERECHA (girado 180°) -->
+        <img
+            src="/imagenes/flrocard.webp"
+            alt=""
+            aria-hidden="true"
+            width="165"
+            height="328"
+            loading="lazy"
+            decoding="async"
+            class="absolute -bottom-6 -right-12 w-20 sm:w-24 pointer-events-none select-none rotate-180 z-20"
+        />
+
+        <!-- Marco vino interior -->
+        <div
+            class="pointer-events-none absolute inset-3 rounded-2xl border"
+            style="border-color: rgba(185,138,147,0.4);"
+        >
+        </div>
+
+        <div class="relative">
+        <!-- TÍTULO -->
+        <p
+            class="font-romantic text-3xl leading-tight titulo-dorado"
+        >
+            Solo Adultos
+        </p>
+
+        <!-- DIVISOR con rombo vino -->
+        <div class="flex items-center justify-center gap-2 mt-3">
+            <span
+                class="h-px w-10"
+                style="background-color: rgba(185,138,147,0.6);"></span>
+            <span class="w-1.5 h-1.5 rotate-45 rombo-oro"></span>
+            <span
+                class="h-px w-10"
+                style="background-color: rgba(185,138,147,0.6);"></span>
+        </div>
+
+        <!-- TEXTO -->
+        <p
+            class="font-cormorant text-xl text-[#3B0A14] mt-5 leading-relaxed"
+        >
+            Amamos a sus pequeños con todo el corazón, pero hemos pensado esta
+            celebración como una velada especial solo para adultos. Esperamos
+            que comprendan y aprovechen para disfrutar de una noche libre,
+            bailar y festejar con nosotros.
+            <br /> ¡Gracias de corazón por su comprensión!
+        </p>
+        </div>
+    </div>
+</section>
+
+<script>
+    import { revelar } from "../scripts/animaciones";
+
+    revelar(
+        "#card-puntual",
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 1.1 },
+        "#puntual",
+        "top 85%",
+    );
+</script>
+
+<style>
+    .icono-vino {
+        filter: brightness(0) saturate(100%) invert(13%) sepia(94%)
+            saturate(1565%) hue-rotate(324deg) brightness(92%) contrast(95%);
+    }
+</style>

@@ -1,0 +1,38 @@
+---
+// Imagen4.astro
+---
+
+<!--
+    Va dentro de Despedida.astro, que tiene px-8. El full-bleed
+    (w-screen + left-1/2 + -translate-x-1/2) ignora ese padding para que
+    la foto llegue de borde a borde.
+-->
+<section
+    id="imagen4"
+    class="relative left-1/2 -translate-x-1/2 w-screen overflow-hidden my-14"
+>
+    <img
+        id="imagen4-img"
+        src="/imagenes/imagen4.webp"
+        alt="Omar y Andrea"
+        width="1009"
+        height="1280"
+        loading="lazy"
+        decoding="async"
+        class="block w-full h-auto select-none"
+    />
+</section>
+
+<script>
+    import { revelar } from "../scripts/animaciones";
+
+    // Zoom suave: la foto entra ligeramente ampliada y se asienta
+    // en su tamaño real mientras aparece.
+    revelar(
+        "#imagen4-img",
+        { opacity: 0, scale: 1.16 },
+        { opacity: 1, scale: 1, duration: 1.9, ease: "power3.out" },
+        "#imagen4",
+        "top 92%",
+    );
+</script>

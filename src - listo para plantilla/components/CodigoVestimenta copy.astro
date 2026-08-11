@@ -1,0 +1,121 @@
+---
+// CodigoVestimenta.astro
+---
+
+<section
+    id="codigo-vestimenta"
+    class="relative w-full overflow-hidden"
+    style="background-color: #6E1B2B;"
+>
+    <!-- WATER WAVE ARRIBA — un solo SVG, sin verde entre ondas -->
+    <div class="absolute top-0 left-0 w-full z-10" style="height: 52px;">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 52"
+            preserveAspectRatio="none"
+            class="w-full h-full"
+        >
+            <!-- Base sólida: cubre el hueco entre ondas -->
+            <rect x="0" y="0" width="1440" height="26" fill="#ffffff"></rect>
+
+            <!-- Onda 2 — atrás, tono levemente gris para dar profundidad sutil -->
+            <path
+                d="M0,37 C60,43 120,43 180,37 C240,31 300,31 360,37 C420,43 480,43 540,37 C600,31 660,31 720,37 C780,43 840,43 900,37 C960,31 1020,31 1080,37 C1140,43 1200,43 1260,37 C1320,31 1380,31 1440,37 L1440,0 L0,0 Z"
+                fill="#ffffff"></path>
+
+            <!-- Onda 1 — frente, blanco puro igual al fondo de página -->
+            <path
+                d="M0,26 C60,20 120,20 180,26 C240,32 300,32 360,26 C420,20 480,20 540,26 C600,32 660,32 720,26 C780,20 840,20 900,26 C960,32 1020,32 1080,26 C1140,20 1200,20 1260,26 C1320,32 1380,32 1440,26 L1440,0 L0,0 Z"
+                fill="#f0f0ef"></path>
+        </svg>
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="relative z-20 text-center px-8 pt-14 pb-10">
+        <!-- TÍTULO Dress Code -->
+        <p class="font-romantic text-5xl text-white leading-none">Dress Code</p>
+
+        <!-- DOS COLUMNAS -->
+        <div class="flex items-start justify-center gap-6 mt-8">
+            <!-- DAMAS -->
+            <div class="flex flex-col items-center flex-1">
+                <div style="mix-blend-mode: screen;">
+                    <img
+                        src="/imagenes/vestido.png"
+                        alt="Damas"
+                        class="w-14 h-14 mx-auto"
+                        style="filter: invert(1);"
+                    />
+                </div>
+                <p
+                    class="font-cormorant uppercase text-sm text-white tracking-[0.15em] mt-2 font-semibold"
+                >
+                    Damas
+                </p>
+                <p class="font-cormorant text-sm text-white mt-1">
+                    Vestido Largo
+                </p>
+            </div>
+
+            <!-- Línea divisoria vertical -->
+            <div
+                class="w-px self-stretch"
+                style="background: rgba(255,255,255,0.6); min-height: 80px;"
+            >
+            </div>
+
+            <!-- VARONES -->
+            <div class="flex flex-col items-center flex-1">
+                <div style="mix-blend-mode: screen;">
+                    <img
+                        src="/imagenes/traje.png"
+                        alt="Varones"
+                        class="w-14 h-14 mx-auto"
+                        style="filter: invert(1);"
+                    />
+                </div>
+                <p
+                    class="font-cormorant uppercase text-sm text-white tracking-[0.15em] mt-2 font-semibold"
+                >
+                    Varones
+                </p>
+                <p class="font-cormorant text-sm text-white mt-1">
+                    Traje con corbata
+                </p>
+            </div>
+        </div>
+
+        <!-- NOTA FINAL -->
+        <p
+            class="font-cormorant italic text-sm text-white mt-7 leading-relaxed"
+        >
+            Les recordamos que el color blanco<br />está reservado para la
+            novia.
+        </p>
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        gsap.fromTo(
+            "#codigo-vestimenta",
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1.3,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#codigo-vestimenta",
+                    start: "top 82%",
+                    toggleActions: "play none none reset",
+                },
+            },
+        );
+    });
+</script>

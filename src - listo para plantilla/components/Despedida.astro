@@ -1,0 +1,136 @@
+---
+// Despedida.astro
+import Imagen4 from "./Imagen4.astro";
+---
+
+<section id="despedida" class="relative w-full pt-4 pb-32 px-8 text-center overflow-hidden isolate">
+
+    <!-- BOTELLA — ESQUINA INFERIOR IZQUIERDA -->
+    <img
+        src="/imagenes/vino.webp"
+        alt=""
+        aria-hidden="true"
+        width="420"
+        height="530"
+        loading="lazy"
+        decoding="async"
+        class="absolute bottom-0 left-0 w-44 pointer-events-none select-none z-[-1]"
+    />
+
+    <!-- COPA — ESQUINA INFERIOR DERECHA -->
+    <img
+        src="/imagenes/copa2.webp"
+        alt=""
+        aria-hidden="true"
+        width="351"
+        height="440"
+        loading="lazy"
+        decoding="async"
+        class="absolute bottom-0 right-0 w-24 pointer-events-none select-none scale-x-[-1] z-[-1]"
+    />
+
+    <div class="relative z-10">
+    <!-- SEPARADOR IMAGEN -->
+    <img
+        src="/imagenes/separadoruva.webp"
+        alt=""
+        aria-hidden="true"
+        width="640"
+        height="171"
+        loading="lazy"
+        decoding="async"
+        class="mx-auto mb-8 w-56 select-none pointer-events-none"
+    />
+
+    <!-- FOTO DE CIERRE -->
+    <Imagen4 />
+
+    <!-- CIERRE: separador + texto + firma (se revela como un bloque) -->
+    <div id="cierre-despedida">
+        <!-- SEPARADOR SOBRE EL TEXTO DE DESPEDIDA -->
+        <img
+            src="/imagenes/separadoruva.webp"
+            alt=""
+            aria-hidden="true"
+            width="640"
+            height="171"
+            loading="lazy"
+            decoding="async"
+            class="mx-auto mb-5 w-56 select-none pointer-events-none"
+        />
+
+        <!-- TEXTO DE DESPEDIDA -->
+        <div class="relative">
+            <!-- LATERAL DECORATIVO IZQUIERDA -->
+            <img
+                src="/imagenes/lateral2.webp"
+                alt=""
+                aria-hidden="true"
+                width="220"
+                height="950"
+                loading="lazy"
+                decoding="async"
+                class="absolute top-1/2 -left-8 w-12 pointer-events-none select-none -translate-y-1/2 z-[-1]"
+            />
+
+            <!-- LATERAL DECORATIVO DERECHA (espejo) -->
+            <img
+                src="/imagenes/lateral2.webp"
+                alt=""
+                aria-hidden="true"
+                width="220"
+                height="950"
+                loading="lazy"
+                decoding="async"
+                class="absolute top-1/2 -right-8 w-12 pointer-events-none select-none scale-x-[-1] -translate-y-1/2 z-[-1]"
+            />
+
+            <p
+                class="font-cormorant text-xl text-[#3B0A14] leading-[1.85] max-w-xs mx-auto px-6"
+            >
+                Gracias por acompañarnos en el día más especial de nuestra
+                historia. Su compañía en este día es el mayor regalo que podemos
+                recibir. Gracias por sus oraciones, su cariño y por ser parte de
+                nuestro camino. Estamos agradecidos con Dios por permitirnos
+                celebrar este momento con ustedes, nuestra familia y amigos más
+                queridos.
+            </p>
+        </div>
+
+        <!-- CON TODO NUESTRO AMOR -->
+        <p class="font-upcil uppercase text-2xl text-[#3B0A14] mt-8">
+            Con todo nuestro amor
+        </p>
+
+        <!-- NOMBRES (mismo estilo que NombresFlores.astro) -->
+        <h2
+            class="font-romantic mt-3 leading-[1.45] dorado-solido"
+            style="font-size: clamp(2.45rem, 11vw, 3.6rem);"
+        >
+            Omar
+            <span class="block font-romantic my-2" style="font-size: 0.62em;"
+                >&amp;</span
+            >
+            Andrea
+        </h2>
+    </div>
+    </div>
+</section>
+
+<script>
+    import { revelar } from "../scripts/animaciones";
+
+    /*
+        Se anima el bloque de cierre, no la sección entera. #despedida mide
+        varias pantallas (foto a sangre + textos + firma) y fundirla de golpe
+        obligaba a componer esa superficie completa; además chocaba con la
+        animación propia de Imagen4, que vive dentro.
+    */
+    revelar(
+        "#cierre-despedida",
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 1.1 },
+        "#cierre-despedida",
+        "top 88%",
+    );
+</script>

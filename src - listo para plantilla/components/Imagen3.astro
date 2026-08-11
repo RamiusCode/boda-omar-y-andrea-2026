@@ -1,0 +1,30 @@
+---
+// Imagen3.astro
+---
+
+<section id="imagen3" class="w-full flex justify-center overflow-hidden my-14">
+    <img
+        id="imagen3-img"
+        src="/imagenes/imagen3.webp"
+        alt="Omar y Andrea"
+        width="972"
+        height="1280"
+        loading="lazy"
+        decoding="async"
+        class="block max-w-full h-auto select-none"
+    />
+</section>
+
+<script>
+    import { revelar } from "../scripts/animaciones";
+
+    // Zoom suave: la foto entra ligeramente ampliada y se asienta
+    // en su tamaño real mientras aparece.
+    revelar(
+        "#imagen3-img",
+        { opacity: 0, scale: 1.16 },
+        { opacity: 1, scale: 1, duration: 1.9, ease: "power3.out" },
+        "#imagen3",
+        "top 92%",
+    );
+</script>
