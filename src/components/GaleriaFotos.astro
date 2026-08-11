@@ -14,7 +14,7 @@ const carrusel = [...fotos, ...fotos];
 >
     <!-- COPA DECORATIVA IZQUIERDA -->
     <img
-        src="/imagenes/copa2.png"
+        src="/imagenes/copa2.webp"
         alt=""
         aria-hidden="true"
         class="absolute top-10 left-0 w-16 pointer-events-none select-none z-[-1]"
@@ -22,7 +22,7 @@ const carrusel = [...fotos, ...fotos];
 
     <!-- COPA DECORATIVA DERECHA -->
     <img
-        src="/imagenes/copa2.png"
+        src="/imagenes/copa2.webp"
         alt=""
         aria-hidden="true"
         class="absolute top-10 right-0 w-16 pointer-events-none select-none scale-x-[-1] z-[-1]"
@@ -30,7 +30,7 @@ const carrusel = [...fotos, ...fotos];
 
     <!-- SEPARADOR -->
     <img
-        src="/imagenes/separadoruva.png"
+        src="/imagenes/separadoruva.webp"
         alt=""
         aria-hidden="true"
         class="mx-auto mb-5 w-56 select-none pointer-events-none"
@@ -45,7 +45,7 @@ const carrusel = [...fotos, ...fotos];
     </p>
     <p
         id="galeria-subtitulo"
-        class="font-cormorant italic text-lg text-[#5E1A26] text-center mt-2 mb-8 px-6"
+        class="font-cormorant italic text-xl text-[#3B0A14] text-center mt-2 mb-8 px-6"
     >
         Nuestra historia en imágenes
     </p>
@@ -92,7 +92,7 @@ const carrusel = [...fotos, ...fotos];
     <div class="text-center mt-8">
         <button
             id="btn-ver-galeria"
-            class="group relative inline-block py-3 px-9 rounded-full font-cormorant uppercase text-sm tracking-widest text-white bg-[#6E1B2B] shadow-md hover:bg-[#4E1220] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+            class="group relative inline-block py-3 px-9 rounded-full font-cormorant uppercase text-base tracking-widest text-white bg-[#6E1B2B] shadow-md hover:bg-[#4E1220] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
         >
             <span
                 class="pointer-events-none absolute inset-1.5 rounded-full border border-[#D4B473]/60 transition-all duration-300 group-hover:inset-[7px]"
@@ -179,38 +179,24 @@ const carrusel = [...fotos, ...fotos];
 </div>
 
 <script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import { gsap, revelar, animacionReducida } from "../scripts/animaciones";
 
-    gsap.registerPlugin(ScrollTrigger);
+    // Encabezado
+    revelar(
+        ["#galeria-titulo", "#galeria-subtitulo"],
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 1, stagger: 0.15 },
+        "#galeria-fotos",
+        "top 85%",
+    );
 
-    document.addEventListener("DOMContentLoaded", () => {
-        // Encabezado
-        gsap.fromTo(
-            ["#galeria-titulo", "#galeria-subtitulo"],
-            { opacity: 0, y: 20 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                ease: "power2.out",
-                stagger: 0.15,
-                scrollTrigger: {
-                    trigger: "#galeria-fotos",
-                    start: "top 82%",
-                    toggleActions: "play none none reset",
-                },
-            },
-        );
-
+    {
         // ── CARRUSEL: avance automático + arrastre manual ──
         const viewport = document.querySelector<HTMLElement>(".galeria-marquee");
         const track = document.querySelector<HTMLElement>(".galeria-track");
 
         if (viewport && track) {
-            const sinMovimiento = window.matchMedia(
-                "(prefers-reduced-motion: reduce)",
-            ).matches;
+            const sinMovimiento = animacionReducida;
 
             const VELOCIDAD = 22; // px por segundo del avance automático
             const ESPERA = 700; // ms de pausa tras soltar antes de reanudar
@@ -241,6 +227,13 @@ const carrusel = [...fotos, ...fotos];
             let ultimoT = 0;
             let anterior = performance.now();
 
+            /*
+                El bucle solo corre mientras el carrusel se ve. Antes pedía un
+                cuadro cada 16 ms durante toda la visita, aunque la galería
+                estuviera fuera de pantalla: ese trabajo competía con el scroll.
+            */
+            let cuadro = 0;
+
             const bucle = (ahora: number) => {
                 const dt = Math.min((ahora - anterior) / 1000, 0.05);
                 anterior = ahora;
@@ -260,9 +253,28 @@ const carrusel = [...fotos, ...fotos];
                         pintar();
                     }
                 }
-                requestAnimationFrame(bucle);
+                cuadro = requestAnimationFrame(bucle);
             };
-            requestAnimationFrame(bucle);
+
+            const arrancarBucle = () => {
+                if (cuadro) return;
+                anterior = performance.now();
+                cuadro = requestAnimationFrame(bucle);
+            };
+
+            const detenerBucle = () => {
+                if (!cuadro) return;
+                cancelAnimationFrame(cuadro);
+                cuadro = 0;
+            };
+
+            new IntersectionObserver((entradas) => {
+                entradas[0].isIntersecting ? arrancarBucle() : detenerBucle();
+            }).observe(viewport);
+
+            document.addEventListener("visibilitychange", () => {
+                if (document.hidden) detenerBucle();
+            });
 
             viewport.addEventListener("pointerdown", (e) => {
                 arrastrando = true;
@@ -357,7 +369,7 @@ const carrusel = [...fotos, ...fotos];
         modal?.addEventListener("click", (e) => {
             if (e.target === modal) cerrar();
         });
-    });
+    }
 </script>
 
 <style>

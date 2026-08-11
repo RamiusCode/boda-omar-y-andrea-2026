@@ -50,26 +50,12 @@
 </section>
 
 <script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import { revelar } from "../scripts/animaciones";
 
-    gsap.registerPlugin(ScrollTrigger);
-
-    document.addEventListener("DOMContentLoaded", () => {
-        gsap.fromTo(
-            "#foto-final-img",
-            { opacity: 0, scale: 1.04 },
-            {
-                opacity: 1,
-                scale: 1,
-                duration: 1.5,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: "#foto-final",
-                    start: "top 85%",
-                    toggleActions: "play none none reset",
-                },
-            },
-        );
-    });
+    revelar(
+        "#foto-final-img",
+        { opacity: 0, scale: 1.04 },
+        { opacity: 1, scale: 1, duration: 1.3 },
+        "#foto-final",
+    );
 </script>

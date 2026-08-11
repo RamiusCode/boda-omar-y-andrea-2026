@@ -1,0 +1,97 @@
+---
+// NombresPadres.astro
+---
+
+<section
+    id="nombres-padres"
+    class="relative w-full pt-2 pb-10 px-8 text-center overflow-hidden isolate"
+>
+    <!-- FLOR DECORATIVA DERECHA -->
+    <img
+        src="/imagenes/florcostado.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute top-1/2 right-0 w-24 pointer-events-none select-none scale-x-[-1] -translate-y-1/2 z-[-1]"
+    />
+    <!-- SEPARADOR DE UVAS -->
+    <img
+        src="/imagenes/separadoruva.png"
+        alt=""
+        aria-hidden="true"
+        class="w-56 h-auto mx-auto mb-6 select-none pointer-events-none"
+    />
+
+    <!-- TÍTULO PRINCIPAL (dorado) -->
+    <p class="font-upcii uppercase text-2xl leading-snug titulo-dorado">
+        Con la bendición de Dios<br />y de nuestros padres
+    </p>
+
+    <!-- PADRES DEL NOVIO -->
+    <div class="mt-6">
+        <p class="font-upcil text-2xl texto-oro">PADRES DEL NOVIO</p>
+        <p class="font-cormorant text-xl text-[#5E1A26] mt-1 leading-snug">
+            Cnl. DAEN Omar H. Fuentes García
+        </p>
+        <p class="font-cormorant text-xl text-[#5E1A26] leading-snug">
+            Luz Ríos Barrionuevo
+        </p>
+    </div>
+
+    <!-- PADRES DE LA NOVIA -->
+    <div class="mt-7">
+        <p class="font-upcil text-2xl texto-oro">PADRES DE LA NOVIA</p>
+        <p class="font-cormorant text-xl text-[#5E1A26] mt-1 leading-snug">
+            Dr.Gualberto Romero Rocabado
+        </p>
+        <p class="font-cormorant text-xl text-[#5E1A26] leading-snug">
+            Lic. Cristina Marca Huanca
+        </p>
+    </div>
+
+    <!-- PADRINOS DE RELIGIOSO -->
+    <div class="mt-7">
+        <p class="font-upcil text-2xl texto-oro">PADRINOS DE RELIGIOSO</p>
+        <p class="font-cormorant text-xl text-[#5E1A26] mt-1 leading-snug">
+            José Antonio Carvajal Ríos
+        </p>
+        <p class="font-cormorant text-xl text-[#5E1A26] leading-snug">
+            Sandra Chávez Olivera
+        </p>
+    </div>
+
+    <!-- PADRINOS DE CIVIL -->
+    <div class="mt-7">
+        <p class="font-upcil text-2xl texto-oro">PADRINOS DE CIVIL</p>
+        <p class="font-cormorant text-xl text-[#5E1A26] mt-1 leading-snug">
+            Dr. Nelson Vega Loza
+        </p>
+        <p class="font-cormorant text-xl text-[#5E1A26] leading-snug">
+            Dra. Diana Romero Marca
+        </p>
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        gsap.fromTo(
+            "#nombres-padres",
+            { opacity: 0, y: 28 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1.3,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#nombres-padres",
+                    start: "top 82%",
+                    toggleActions: "play none none reset",
+                },
+            },
+        );
+    });
+</script>

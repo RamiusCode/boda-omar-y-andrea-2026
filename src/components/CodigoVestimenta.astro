@@ -33,7 +33,11 @@
     </div>
 
     <!-- CONTENIDO -->
-    <div class="relative text-center px-8 pt-16 pb-10" style="z-index: 2;">
+    <div
+        id="vestimenta-contenido"
+        class="relative text-center px-8 pt-16 pb-10"
+        style="z-index: 2;"
+    >
         <!-- TÍTULO Dress Code -->
         <p class="font-romantic text-3xl leading-none titulo-oro-claro">
             Dress Code
@@ -46,13 +50,17 @@
                 <img
                     src="/imagenes/vestido.png"
                     alt="Damas"
+                    width="512"
+                    height="512"
+                    loading="lazy"
+                    decoding="async"
                     class="w-16 h-16 mx-auto"
                     style="filter: invert(1); mix-blend-mode: screen;"
                 />
                 <p class="font-upcil uppercase text-2xl text-white mt-2">
                     Damas
                 </p>
-                <p class="font-cormorant text-xl text-white mt-1">Vestido</p>
+                <p class="font-cormorant text-2xl text-white mt-1">Vestido</p>
             </div>
 
             <!-- Línea divisoria vertical -->
@@ -67,13 +75,17 @@
                 <img
                     src="/imagenes/traje.png"
                     alt="Varones"
+                    width="512"
+                    height="512"
+                    loading="lazy"
+                    decoding="async"
                     class="w-16 h-16 mx-auto"
                     style="filter: invert(1); mix-blend-mode: screen;"
                 />
                 <p class="font-upcil uppercase text-2xl text-white mt-2">
                     Varones
                 </p>
-                <p class="font-cormorant text-xl text-white mt-1">Traje</p>
+                <p class="font-cormorant text-2xl text-white mt-1">Traje</p>
             </div>
         </div>
 
@@ -113,26 +125,20 @@
 </section>
 
 <script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import { revelar } from "../scripts/animaciones";
 
-    gsap.registerPlugin(ScrollTrigger);
-
-    document.addEventListener("DOMContentLoaded", () => {
-        gsap.fromTo(
-            "#codigo-vestimenta",
-            { opacity: 0, y: 30 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 1.3,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: "#codigo-vestimenta",
-                    start: "top 82%",
-                    toggleActions: "play none none reset",
-                },
-            },
-        );
-    });
+    /*
+        Se anima el contenido, no la sección entera. La sección es un bloque
+        vino a todo el ancho con ondas SVG y dos iconos en `mix-blend-mode`:
+        moverla y fundirla obligaba al navegador a recalcular esa mezcla sobre
+        toda la franja. Además el fondo ya no se desplaza, así que no aparece
+        el corte con las secciones vecinas.
+    */
+    revelar(
+        "#vestimenta-contenido",
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 1.1 },
+        "#codigo-vestimenta",
+        "top 85%",
+    );
 </script>

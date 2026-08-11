@@ -6,12 +6,20 @@
     id="sugerencia-regalos"
     class="relative w-full py-10 px-6 text-center overflow-hidden isolate"
 >
-    <!-- RACIMO DECORATIVO IZQUIERDA -->
+    <!-- LATERAL DECORATIVO IZQUIERDA (pegado al borde) -->
     <img
-        src="/imagenes/uva2.png"
+        src="/imagenes/lateral2.webp"
         alt=""
         aria-hidden="true"
         class="absolute top-[58%] left-0 w-12 pointer-events-none select-none -translate-y-1/2 z-[-1]"
+    />
+
+    <!-- LATERAL DECORATIVO DERECHA (espejo, pegado al borde) -->
+    <img
+        src="/imagenes/lateral2.webp"
+        alt=""
+        aria-hidden="true"
+        class="absolute top-[58%] right-0 w-12 pointer-events-none select-none scale-x-[-1] -translate-y-1/2 z-[-1]"
     />
     <!-- TÍTULO -->
     <p class="font-romantic text-3xl leading-snug mb-6 titulo-dorado">
@@ -29,7 +37,7 @@
 
     <!-- TEXTO -->
     <p
-        class="font-cormorant text-xl text-[#5E1A26] mt-5 leading-relaxed max-w-xs mx-auto"
+        class="font-cormorant text-xl text-[#3B0A14] mt-5 leading-relaxed max-w-xs mx-auto"
     >
         Su presencia y sus buenos deseos son nuestro mejor regalo. Si desean
         hacernos llegar algún presente estaremos muy agradecidos. Gracias por tu
@@ -46,40 +54,27 @@
 
     <!-- DATOS DE CUENTA -->
     <div class="mt-5 flex flex-col items-center gap-1">
-        <p class="font-upcil uppercase text-xl text-[#6E1B2B]">
+        <p class="font-upcil uppercase text-2xl text-[#3B0A14]">
             Omar Alexander y Andrea Eugenia
         </p>
-        <p class="font-cormorant text-xl text-[#5E1A26]">
+        <p class="font-cormorant text-xl text-[#3B0A14]">
             Número de cuenta:
             <span class="font-cormorant font-semibold texto-oro">0000000</span>
         </p>
-        <p class="font-cormorant text-xl text-[#5E1A26]">
+        <p class="font-cormorant text-xl text-[#3B0A14]">
             Concepto: Omar y Andrea
         </p>
     </div>
 </section>
 
 <script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import { revelar } from "../scripts/animaciones";
 
-    gsap.registerPlugin(ScrollTrigger);
-
-    document.addEventListener("DOMContentLoaded", () => {
-        gsap.fromTo(
-            "#sugerencia-regalos",
-            { opacity: 0, y: 28 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 1.3,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: "#sugerencia-regalos",
-                    start: "top 82%",
-                    toggleActions: "play none none reset",
-                },
-            },
-        );
-    });
+    revelar(
+        "#sugerencia-regalos",
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 1.1 },
+        "#sugerencia-regalos",
+        "top 85%",
+    );
 </script>

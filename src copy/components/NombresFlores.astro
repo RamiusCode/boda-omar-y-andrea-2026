@@ -1,0 +1,289 @@
+---
+// NombresFlores.astro
+---
+
+<section id="seccion-nombres" class="relative w-full overflow-hidden">
+
+    <!-- RACIMO DECORATIVO DERECHA -->
+    <img
+        src="/imagenes/uva2.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute bottom-40 right-0 w-14 pointer-events-none select-none scale-x-[-1] z-20"
+    />
+    <!-- FOTO PRINCIPAL DE LOS NOVIOS -->
+    <div id="foto-container" class="relative w-full overflow-hidden">
+        <img
+            id="foto-novios"
+            src="/imagenes/principal.webp"
+            alt="Omar y Andrea"
+            class="block w-full h-auto foto-desvanecida"
+        />
+    </div>
+
+    <!-- INDICADOR DE SCROLL: 3 flechas hacia abajo -->
+    <div
+        class="flex flex-col items-center -mt-2"
+        aria-hidden="true"
+    >
+        <svg
+            class="flecha-scroll w-7 h-7"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#6E1B2B"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+            <path d="M6 9l6 6 6-6"></path>
+        </svg>
+        <svg
+            class="flecha-scroll w-7 h-7 -mt-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#6E1B2B"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+            <path d="M6 9l6 6 6-6"></path>
+        </svg>
+        <svg
+            class="flecha-scroll w-7 h-7 -mt-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#6E1B2B"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+            <path d="M6 9l6 6 6-6"></path>
+        </svg>
+    </div>
+
+    <!-- TEXTO: ¡NOS CASAMOS! + NOMBRES + ANILLOS -->
+    <div
+        id="texto-nombres"
+        class="text-center px-6 pt-4 pb-2 flex flex-col items-center"
+    >
+        <p
+            class="font-cormorant uppercase tracking-[0.35em] text-base font-semibold"
+            style="color: #8E2334;"
+        >
+            ¡NOS CASAMOS!
+        </p>
+
+        <h2
+            class="font-romantic mt-6 leading-[1.45] dorado-solido"
+            style="font-size: clamp(2.1rem, 9.5vw, 3.1rem);"
+        >
+            Omar
+            <span
+                class="block font-romantic my-2"
+                style="font-size: 0.62em;">y</span
+            >
+            Andrea
+        </h2>
+
+        <!-- Anillo con barras doradas horizontales a los costados -->
+        <div
+            class="flex items-center justify-center gap-3 mt-5 w-full max-w-[15rem]"
+        >
+            <span class="h-px flex-1 bg-[#B98A93] opacity-70"></span>
+            <img
+                src="/imagenes/anillo.png"
+                alt="Anillos de boda"
+                class="w-12 anillo-oro flex-shrink-0"
+            />
+            <span class="h-px flex-1 bg-[#B98A93] opacity-70"></span>
+        </div>
+    </div>
+</section>
+
+<!-- BOTÓN FLOTANTE PLAY/PAUSE -->
+<button
+    id="btn-audio-control"
+    aria-label="Controlar música"
+    class="fixed bottom-6 right-6 z-[9999] w-12 h-12 rounded-full shadow-lg
+           flex items-center justify-center
+           transition-all duration-300 hover:scale-110 active:scale-95"
+    style="opacity: 0; pointer-events: none; background-color: #6E1B2B; border: 1.5px solid #B08A3C;"
+>
+    <svg
+        id="icono-pause"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-5 h-5"
+        viewBox="0 0 24 24"
+        fill="#FFFFFF"
+    >
+        <rect x="6" y="4" width="4" height="16" rx="1"></rect>
+        <rect x="14" y="4" width="4" height="16" rx="1"></rect>
+    </svg>
+    <svg
+        id="icono-play"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-5 h-5 hidden"
+        viewBox="0 0 24 24"
+        fill="#FFFFFF"
+    >
+        <path d="M8 5v14l11-7z"></path>
+    </svg>
+</button>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // FOTO - aparece con leve zoom out
+        gsap.fromTo(
+            "#foto-novios",
+            { opacity: 0, scale: 1.06 },
+            {
+                opacity: 1,
+                scale: 1,
+                duration: 1.5,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#foto-container",
+                    start: "top 85%",
+                    toggleActions: "play none none reset",
+                },
+            },
+        );
+
+        // TEXTO - sube suavemente
+        gsap.fromTo(
+            "#texto-nombres",
+            { opacity: 0, y: 28 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power2.out",
+                delay: 0.4,
+                scrollTrigger: {
+                    trigger: "#texto-nombres",
+                    start: "top 92%",
+                    toggleActions: "play none none reset",
+                },
+            },
+        );
+
+        // BOTÓN FLOTANTE PLAY/PAUSE
+        const btnAudio = document.getElementById(
+            "btn-audio-control",
+        ) as HTMLButtonElement;
+        const iconoPlay = document.getElementById("icono-play");
+        const iconoPause = document.getElementById("icono-pause");
+
+        const intervalo = setInterval(() => {
+            const audio = (window as any).audioGlobal;
+            if (audio) {
+                clearInterval(intervalo);
+                gsap.to(btnAudio, {
+                    opacity: 1,
+                    duration: 0.5,
+                    ease: "power2.out",
+                    onStart: () => {
+                        btnAudio.style.pointerEvents = "auto";
+                    },
+                });
+                iconoPlay?.classList.add("hidden");
+                iconoPause?.classList.remove("hidden");
+
+                btnAudio.addEventListener("click", () => {
+                    const audioActual = (window as any).audioGlobal;
+                    const reproduciendo = (window as any)
+                        .estaReproduciendoGlobal;
+                    if (!audioActual) return;
+                    if (reproduciendo) {
+                        audioActual.pause();
+                        (window as any).estaReproduciendoGlobal = false;
+                        iconoPause?.classList.add("hidden");
+                        iconoPlay?.classList.remove("hidden");
+                    } else {
+                        audioActual.play();
+                        (window as any).estaReproduciendoGlobal = true;
+                        iconoPlay?.classList.add("hidden");
+                        iconoPause?.classList.remove("hidden");
+                    }
+                    gsap.fromTo(
+                        btnAudio,
+                        { scale: 0.85 },
+                        { scale: 1, duration: 0.3, ease: "back.out(2)" },
+                    );
+                });
+            }
+        }, 300);
+    });
+</script>
+
+<style>
+    /*
+        Desvanecido inferior de la foto principal.
+        La máscara vuelve transparente el borde de abajo, así la imagen
+        se funde con el fondo y no queda el corte recto.
+    */
+    .foto-desvanecida {
+        -webkit-mask-image: linear-gradient(
+            to bottom,
+            #000 0%,
+            #000 68%,
+            rgba(0, 0, 0, 0.88) 79%,
+            rgba(0, 0, 0, 0.5) 90%,
+            rgba(0, 0, 0, 0) 100%
+        );
+        mask-image: linear-gradient(
+            to bottom,
+            #000 0%,
+            #000 68%,
+            rgba(0, 0, 0, 0.88) 79%,
+            rgba(0, 0, 0, 0.5) 90%,
+            rgba(0, 0, 0, 0) 100%
+        );
+    }
+
+    /*
+        Flechas de scroll: la onda va de la primera a la última
+        para que se lea como un movimiento hacia abajo.
+    */
+    .flecha-scroll {
+        opacity: 0.2;
+        animation: onda-flecha 1.8s ease-in-out infinite;
+    }
+    .flecha-scroll:nth-of-type(2) {
+        animation-delay: 0.18s;
+    }
+    .flecha-scroll:nth-of-type(3) {
+        animation-delay: 0.36s;
+    }
+
+    @keyframes onda-flecha {
+        0%,
+        100% {
+            opacity: 0.2;
+            transform: translateY(0);
+        }
+        45% {
+            opacity: 0.95;
+            transform: translateY(4px);
+        }
+    }
+
+    /* Sin animación si el usuario la tiene desactivada en su sistema */
+    @media (prefers-reduced-motion: reduce) {
+        .flecha-scroll {
+            animation: none;
+            opacity: 0.55;
+        }
+    }
+
+    /* Filtro para colorizar el icono de anillos en oro #B08A3C */
+    .anillo-oro {
+        filter: brightness(0) saturate(100%) invert(46%) sepia(92%)
+            saturate(289%) hue-rotate(2deg) brightness(101%) contrast(91%);
+    }
+</style>

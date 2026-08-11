@@ -1,0 +1,156 @@
+---
+// Despedida.astro
+---
+
+<section id="despedida" class="relative w-full pt-4 pb-32 px-8 text-center overflow-hidden isolate">
+
+    <!-- RACIMO DECORATIVO IZQUIERDA -->
+    <img
+        src="/imagenes/uva2.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute top-1/2 left-0 w-12 pointer-events-none select-none -translate-y-1/2 z-[-1]"
+    />
+
+    <!-- BOTELLA — ESQUINA INFERIOR IZQUIERDA -->
+    <img
+        src="/imagenes/vino.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute bottom-0 left-0 w-24 pointer-events-none select-none z-[-1]"
+    />
+
+    <!-- COPA — ESQUINA INFERIOR DERECHA -->
+    <img
+        src="/imagenes/copa2.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute bottom-0 right-0 w-24 pointer-events-none select-none scale-x-[-1] z-[-1]"
+    />
+
+    <div class="relative z-10">
+    <!-- SEPARADOR IMAGEN -->
+    <img
+        src="/imagenes/separadoruva.png"
+        alt=""
+        aria-hidden="true"
+        class="mx-auto mb-8 w-56 select-none pointer-events-none"
+    />
+
+    <!-- ═══ MOVILIDAD ═══ -->
+    <div
+        id="card-movilidad"
+        class="relative border border-[#6E1B2B]/60 rounded-3xl p-7 sm:p-8 bg-white shadow-lg text-center overflow-hidden max-w-md mx-auto mb-10"
+    >
+        <!-- Borde interior fino -->
+        <span
+            class="pointer-events-none absolute inset-3 border border-[#6E1B2B]/25 rounded-2xl"
+        ></span>
+
+        <div class="relative">
+            <!-- TÍTULO -->
+            <h3 class="font-romantic text-3xl leading-tight titulo-dorado">
+                Movilidad
+            </h3>
+
+            <!-- DIVISOR ORNAMENTAL -->
+            <div class="flex items-center justify-center gap-3 mt-2 mb-5">
+                <span
+                    class="block w-10 sm:w-14 h-px bg-gradient-to-r from-transparent to-[#6E1B2B]/70"
+                ></span>
+                <span class="w-1.5 h-1.5 rotate-45 rombo-oro"></span>
+                <span
+                    class="block w-10 sm:w-14 h-px bg-gradient-to-l from-transparent to-[#6E1B2B]/70"
+                ></span>
+            </div>
+
+            <!-- ICONO MOVILIDAD (coloreado en vino con máscara) -->
+            <div
+                role="img"
+                aria-label="Movilidad"
+                class="w-16 h-16 mx-auto mb-5"
+                style="background-color: #6E1B2B; -webkit-mask: url('/imagenes/autobus.png') center / contain no-repeat; mask: url('/imagenes/autobus.png') center / contain no-repeat;"
+            >
+            </div>
+
+            <!-- TEXTO -->
+            <p
+                class="font-cormorant text-lg text-[#5E1A26] leading-relaxed max-w-xs mx-auto"
+            >
+                Para su comodidad, al finalizar la ceremonia religiosa
+                contaremos con movilidades que trasladarán a nuestros invitados
+                desde la iglesia hasta el salón de eventos.
+            </p>
+            <p
+                class="font-cormorant text-lg text-[#5E1A26] leading-relaxed max-w-xs mx-auto mt-4"
+            >
+                Quienes deseen podrán hacer uso de este servicio, o bien
+                trasladarse en su vehículo particular, ya que el salón cuenta
+                con garaje para nuestros invitados.
+            </p>
+
+            <!-- Filete dorado de cierre -->
+            <span class="filete-oro w-24 mx-auto mt-6 mb-4"></span>
+
+            <p
+                class="font-cormorant text-lg text-[#6E1B2B] leading-relaxed max-w-xs mx-auto"
+            >
+                ¡Los esperamos para continuar juntos esta celebración tan
+                especial! 🤍
+            </p>
+        </div>
+    </div>
+
+    <!-- TEXTO DE DESPEDIDA -->
+    <p
+        class="font-cormorant text-xl text-[#5E1A26] leading-[1.85] max-w-xs mx-auto px-6"
+    >
+        Gracias por acompañarnos en el día más especial de nuestra historia. Su
+        compañía en este día es el mayor regalo que podemos recibir. Gracias por
+        sus oraciones, su cariño y por ser parte de nuestro camino. Estamos
+        agradecidos con Dios por permitirnos celebrar este momento con ustedes,
+        nuestra familia y amigos más queridos.
+    </p>
+
+    <!-- CON TODO NUESTRO AMOR -->
+    <p class="font-upcil uppercase text-2xl text-[#6E1B2B] mt-8">
+        Con todo nuestro amor
+    </p>
+
+    <!-- NOMBRES -->
+    <!-- NOMBRES (mismo estilo que NombresFlores.astro) -->
+    <h2
+        class="font-romantic mt-3 leading-[1.45] dorado-solido"
+        style="font-size: clamp(2.1rem, 9.5vw, 3.1rem);"
+    >
+        Omar
+        <span class="block font-romantic my-2" style="font-size: 0.62em;">y</span>
+        Andrea
+    </h2>
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        gsap.fromTo(
+            "#despedida",
+            { opacity: 0, y: 28 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1.4,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#despedida",
+                    start: "top 82%",
+                    toggleActions: "play none none reset",
+                },
+            },
+        );
+    });
+</script>

@@ -38,12 +38,12 @@
                     class="w-12 h-12 icono-vino"
                 />
                 <p
-                    class="font-cormorant uppercase text-sm text-[#3F0F1A] mt-2 leading-tight"
+                    class="font-cormorant uppercase text-base text-[#3B0A14] mt-2 leading-tight"
                 >
                     Ceremonia<br />Religiosa
                 </p>
                 <p
-                    class="font-charm font-bold text-lg text-[#8E2334] mt-1 leading-none"
+                    class="font-charm font-bold text-xl text-[#3B0A14] mt-1 leading-none"
                 >
                     16:00 Hrs.
                 </p>
@@ -58,12 +58,12 @@
                     class="w-12 h-12 icono-vino"
                 />
                 <p
-                    class="font-cormorant uppercase text-sm text-[#3F0F1A] mt-2 leading-tight"
+                    class="font-cormorant uppercase text-base text-[#3B0A14] mt-2 leading-tight"
                 >
                     Recepción<br />Social
                 </p>
                 <p
-                    class="font-charm font-bold text-lg text-[#8E2334] mt-1 leading-none"
+                    class="font-charm font-bold text-xl text-[#3B0A14] mt-1 leading-none"
                 >
                     17:30 Hrs.
                 </p>
@@ -80,12 +80,12 @@
                     class="w-12 h-12 icono-vino"
                 />
                 <p
-                    class="font-cormorant uppercase text-sm text-[#3F0F1A] mt-2 leading-tight"
+                    class="font-cormorant uppercase text-base text-[#3B0A14] mt-2 leading-tight"
                 >
                     Brindis<br />y Vals
                 </p>
                 <p
-                    class="font-charm font-bold text-lg text-[#8E2334] mt-1 leading-none"
+                    class="font-charm font-bold text-xl text-[#3B0A14] mt-1 leading-none"
                 >
                     18:00 Hrs.
                 </p>
@@ -97,12 +97,12 @@
             <div class="flex flex-col items-center text-center pl-3 pb-2 pt-8">
                 <img src="/imagenes/cena.png" class="w-12 h-12 icono-vino" />
                 <p
-                    class="font-cormorant uppercase text-sm text-[#3F0F1A] mt-2 leading-tight"
+                    class="font-cormorant uppercase text-base text-[#3B0A14] mt-2 leading-tight"
                 >
                     Cena
                 </p>
                 <p
-                    class="font-charm font-bold text-lg text-[#8E2334] mt-1 leading-none"
+                    class="font-charm font-bold text-xl text-[#3B0A14] mt-1 leading-none"
                 >
                     19:00 Hrs.
                 </p>
@@ -116,12 +116,12 @@
             <div class="flex flex-col items-center text-center pr-3 pb-2 pt-3">
                 <img src="/imagenes/ramo.png" class="w-12 h-12 icono-vino" />
                 <p
-                    class="font-cormorant uppercase text-sm text-[#3F0F1A] mt-2 leading-tight"
+                    class="font-cormorant uppercase text-base text-[#3B0A14] mt-2 leading-tight"
                 >
                     Bouquet
                 </p>
                 <p
-                    class="font-charm font-bold text-lg text-[#8E2334] mt-1 leading-none"
+                    class="font-charm font-bold text-xl text-[#3B0A14] mt-1 leading-none"
                 >
                     20:00 Hrs.
                 </p>
@@ -133,12 +133,12 @@
             <div class="flex flex-col items-center text-center pl-3 pb-2 pt-8">
                 <img src="/imagenes/torta.png" class="w-12 h-12 icono-vino" />
                 <p
-                    class="font-cormorant uppercase text-sm text-[#3F0F1A] mt-2 leading-tight"
+                    class="font-cormorant uppercase text-base text-[#3B0A14] mt-2 leading-tight"
                 >
                     Partimos<br />la Torta
                 </p>
                 <p
-                    class="font-charm font-bold text-lg text-[#8E2334] mt-1 leading-none"
+                    class="font-charm font-bold text-xl text-[#3B0A14] mt-1 leading-none"
                 >
                     21:00 Hrs.
                 </p>
@@ -155,12 +155,12 @@
                     class="w-12 h-12 icono-vino"
                 />
                 <p
-                    class="font-cormorant uppercase text-sm text-[#3F0F1A] mt-2 leading-tight"
+                    class="font-cormorant uppercase text-base text-[#3B0A14] mt-2 leading-tight"
                 >
                     El comienzo<br />de todo
                 </p>
                 <p
-                    class="font-charm font-bold text-lg text-[#8E2334] mt-1 leading-none"
+                    class="font-charm font-bold text-xl text-[#3B0A14] mt-1 leading-none"
                 >
                     22:00 Hrs.
                 </p>
@@ -171,28 +171,15 @@
 </section>
 
 <script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import { revelar } from "../scripts/animaciones";
 
-    gsap.registerPlugin(ScrollTrigger);
-
-    document.addEventListener("DOMContentLoaded", () => {
-        gsap.fromTo(
-            "#itinerario",
-            { opacity: 0, y: 30 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 1.3,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: "#itinerario",
-                    start: "top 82%",
-                    toggleActions: "play none none reset",
-                },
-            },
-        );
-    });
+    revelar(
+        "#itinerario",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1.2 },
+        "#itinerario",
+        "top 85%",
+    );
 </script>
 
 <style>

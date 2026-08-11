@@ -1,0 +1,380 @@
+---
+// GaleriaFotos.astro
+const fotos = Array.from(
+    { length: 10 },
+    (_, i) => `/imagenes/foto${i + 1}.webp`,
+);
+// Duplicamos la lista para que el carrusel haga un bucle continuo y sin cortes
+const carrusel = [...fotos, ...fotos];
+---
+
+<section
+    id="galeria-fotos"
+    class="relative w-full pt-2 pb-6 overflow-hidden isolate"
+>
+    <!-- COPA DECORATIVA IZQUIERDA -->
+    <img
+        src="/imagenes/copa2.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute top-10 left-0 w-16 pointer-events-none select-none z-[-1]"
+    />
+
+    <!-- COPA DECORATIVA DERECHA -->
+    <img
+        src="/imagenes/copa2.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute top-10 right-0 w-16 pointer-events-none select-none scale-x-[-1] z-[-1]"
+    />
+
+    <!-- SEPARADOR -->
+    <img
+        src="/imagenes/separadoruva.png"
+        alt=""
+        aria-hidden="true"
+        class="mx-auto mb-5 w-56 select-none pointer-events-none"
+    />
+
+    <!-- TÍTULO -->
+    <p
+        id="galeria-titulo"
+        class="font-romantic text-3xl text-center leading-none titulo-dorado"
+    >
+        Nosotros
+    </p>
+    <p
+        id="galeria-subtitulo"
+        class="font-cormorant italic text-lg text-[#5E1A26] text-center mt-2 mb-8 px-6"
+    >
+        Nuestra historia en imágenes
+    </p>
+
+    <!-- CARRUSEL AUTOMÁTICO + ARRASTRABLE CON EL DEDO / MOUSE -->
+    <div class="relative w-full">
+        <!-- Degradados laterales para que las fotos entren/salgan suaves -->
+        <div
+            class="absolute inset-y-0 left-0 w-14 z-10 pointer-events-none"
+            style="background: linear-gradient(to right, #ffffff, transparent);"
+        >
+        </div>
+        <div
+            class="absolute inset-y-0 right-0 w-14 z-10 pointer-events-none"
+            style="background: linear-gradient(to left, #ffffff, transparent);"
+        >
+        </div>
+
+        <div class="galeria-marquee w-full">
+            <div class="galeria-track flex gap-3 w-max px-3">
+                {
+                    carrusel.map((src, i) => (
+                        <div class="shrink-0 w-44">
+                            <div class="bg-white p-1.5 rounded-2xl shadow-md">
+                                <div class="overflow-hidden rounded-xl">
+                                    <img
+                                        src={src}
+                                        alt={`Foto ${(i % fotos.length) + 1}`}
+                                        loading="lazy"
+                                        decoding="async"
+                                        draggable="false"
+                                        class="w-full h-56 object-cover block select-none pointer-events-none"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTÓN VER TODA LA GALERÍA -->
+    <div class="text-center mt-8">
+        <button
+            id="btn-ver-galeria"
+            class="group relative inline-block py-3 px-9 rounded-full font-cormorant uppercase text-sm tracking-widest text-white bg-[#6E1B2B] shadow-md hover:bg-[#4E1220] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+        >
+            <span
+                class="pointer-events-none absolute inset-1.5 rounded-full border border-[#D4B473]/60 transition-all duration-300 group-hover:inset-[7px]"
+            ></span>
+            <span class="relative inline-flex items-center gap-2 justify-center">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-4 h-4"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                >
+                    <path
+                        d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"
+                    ></path>
+                </svg>
+                Ver toda la galería
+            </span>
+        </button>
+    </div>
+</section>
+
+<!-- MODAL / LIGHTBOX CON TODAS LAS FOTOS -->
+<div
+    id="galeria-modal"
+    class="fixed inset-0 z-[10000] hidden items-start justify-center p-4 overflow-y-auto"
+    style="background-color: rgba(45,16,24,0.94);"
+>
+    <div class="relative w-full max-w-md mx-auto py-12">
+        <!-- BOTÓN CERRAR -->
+        <button
+            id="btn-cerrar-galeria"
+            aria-label="Cerrar galería"
+            class="fixed top-4 right-4 z-[10001] w-11 h-11 rounded-full flex items-center justify-center bg-white/90 shadow-lg hover:scale-110 transition-transform"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#3F0F1A"
+                stroke-width="2.2"
+                stroke-linecap="round"
+            >
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+            </svg>
+        </button>
+
+        <!-- TÍTULO MODAL -->
+        <p class="font-romantic text-4xl text-white text-center mb-2">
+            Nuestra Galería
+        </p>
+        <div class="flex items-center justify-center gap-2 mb-7">
+            <span
+                class="h-px w-10"
+                style="background-color: rgba(185,138,147,0.7);"></span>
+            <span
+                class="w-1.5 h-1.5 rotate-45"
+                style="background-color: #B98A93;"></span>
+            <span
+                class="h-px w-10"
+                style="background-color: rgba(185,138,147,0.7);"></span>
+        </div>
+
+        <!-- MOSAICO COMPLETO -->
+        <div class="columns-2 gap-3">
+            {
+                fotos.map((src, i) => (
+                    <div class="modal-item break-inside-avoid mb-3 bg-white p-1.5 rounded-2xl shadow-lg">
+                        <div class="overflow-hidden rounded-xl">
+                            <img
+                                src={src}
+                                alt={`Foto ${i + 1}`}
+                                loading="lazy"
+                                decoding="async"
+                                class="w-full h-auto block"
+                            />
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Encabezado
+        gsap.fromTo(
+            ["#galeria-titulo", "#galeria-subtitulo"],
+            { opacity: 0, y: 20 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+                stagger: 0.15,
+                scrollTrigger: {
+                    trigger: "#galeria-fotos",
+                    start: "top 82%",
+                    toggleActions: "play none none reset",
+                },
+            },
+        );
+
+        // ── CARRUSEL: avance automático + arrastre manual ──
+        const viewport = document.querySelector<HTMLElement>(".galeria-marquee");
+        const track = document.querySelector<HTMLElement>(".galeria-track");
+
+        if (viewport && track) {
+            const sinMovimiento = window.matchMedia(
+                "(prefers-reduced-motion: reduce)",
+            ).matches;
+
+            const VELOCIDAD = 22; // px por segundo del avance automático
+            const ESPERA = 700; // ms de pausa tras soltar antes de reanudar
+
+            let mitad = 0; // ancho de un set completo de fotos
+            let posicion = 0; // px desplazados (siempre dentro de [0, mitad))
+            const medir = () => {
+                mitad = track.scrollWidth / 2;
+            };
+            medir();
+            window.addEventListener("resize", medir);
+            window.addEventListener("load", medir);
+
+            // Bucle infinito en ambos sentidos: el módulo evita cualquier tope,
+            // así se puede arrastrar hacia atrás indefinidamente
+            const pintar = () => {
+                if (mitad > 0) {
+                    posicion = ((posicion % mitad) + mitad) % mitad;
+                }
+                track.style.transform = `translate3d(${-posicion}px,0,0)`;
+            };
+
+            let arrastrando = false;
+            let enHover = false;
+            let inercia = 0; // px/s residuales al soltar
+            let reanudarEn = 0;
+            let ultimoX = 0;
+            let ultimoT = 0;
+            let anterior = performance.now();
+
+            const bucle = (ahora: number) => {
+                const dt = Math.min((ahora - anterior) / 1000, 0.05);
+                anterior = ahora;
+
+                if (!arrastrando) {
+                    if (Math.abs(inercia) > 2) {
+                        posicion += inercia * dt;
+                        inercia *= Math.pow(0.004, dt); // frenado suave
+                        pintar();
+                    } else if (
+                        !enHover &&
+                        !sinMovimiento &&
+                        ahora >= reanudarEn
+                    ) {
+                        // Retoma justo desde donde quedó la foto
+                        posicion += VELOCIDAD * dt;
+                        pintar();
+                    }
+                }
+                requestAnimationFrame(bucle);
+            };
+            requestAnimationFrame(bucle);
+
+            viewport.addEventListener("pointerdown", (e) => {
+                arrastrando = true;
+                inercia = 0;
+                ultimoX = e.clientX;
+                ultimoT = performance.now();
+                viewport.setPointerCapture(e.pointerId);
+                viewport.classList.add("arrastrando");
+            });
+
+            viewport.addEventListener("pointermove", (e) => {
+                if (!arrastrando) return;
+                const ahora = performance.now();
+                const dx = e.clientX - ultimoX;
+                const dt = (ahora - ultimoT) / 1000;
+
+                posicion -= dx; // arrastrar a la derecha → retrocede
+                pintar();
+
+                if (dt > 0) {
+                    // velocidad instantánea suavizada, para la inercia al soltar
+                    const v = -dx / dt;
+                    inercia = inercia * 0.7 + v * 0.3;
+                }
+                ultimoX = e.clientX;
+                ultimoT = ahora;
+            });
+
+            const soltar = () => {
+                if (!arrastrando) return;
+                arrastrando = false;
+                viewport.classList.remove("arrastrando");
+                inercia = Math.max(-2600, Math.min(2600, inercia));
+                reanudarEn = performance.now() + ESPERA;
+            };
+
+            viewport.addEventListener("pointerup", soltar);
+            viewport.addEventListener("pointercancel", soltar);
+            viewport.addEventListener("lostpointercapture", soltar);
+            viewport.addEventListener("mouseenter", () => (enHover = true));
+            viewport.addEventListener("mouseleave", () => (enHover = false));
+            viewport.addEventListener("dragstart", (e) => e.preventDefault());
+        }
+
+        // ── MODAL: abrir / cerrar ──
+        const modal = document.getElementById("galeria-modal");
+        const btnVer = document.getElementById("btn-ver-galeria");
+        const btnCerrar = document.getElementById("btn-cerrar-galeria");
+
+        const abrir = () => {
+            if (!modal) return;
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+            document.body.style.overflow = "hidden";
+            gsap.fromTo(
+                modal,
+                { opacity: 0 },
+                { opacity: 1, duration: 0.4, ease: "power2.out" },
+            );
+            gsap.fromTo(
+                ".modal-item",
+                { opacity: 0, y: 24, scale: 0.96 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.6,
+                    ease: "power2.out",
+                    stagger: 0.08,
+                    delay: 0.1,
+                },
+            );
+        };
+
+        const cerrar = () => {
+            if (!modal) return;
+            gsap.to(modal, {
+                opacity: 0,
+                duration: 0.3,
+                ease: "power2.out",
+                onComplete: () => {
+                    modal.classList.add("hidden");
+                    modal.classList.remove("flex");
+                    document.body.style.overflow = "auto";
+                },
+            });
+        };
+
+        btnVer?.addEventListener("click", abrir);
+        btnCerrar?.addEventListener("click", cerrar);
+        // Cerrar al tocar el fondo oscuro (fuera de las fotos)
+        modal?.addEventListener("click", (e) => {
+            if (e.target === modal) cerrar();
+        });
+    });
+</script>
+
+<style>
+    /* Carrusel: la pista se mueve por transform desde JS (auto + arrastre) */
+    .galeria-marquee {
+        overflow: hidden;
+        /* El gesto horizontal lo manejamos nosotros; el vertical sigue
+           desplazando la página con normalidad */
+        touch-action: pan-y;
+        cursor: grab;
+    }
+    .galeria-marquee.arrastrando {
+        cursor: grabbing;
+    }
+    .galeria-track {
+        will-change: transform;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+</style>

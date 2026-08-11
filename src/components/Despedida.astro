@@ -1,46 +1,76 @@
 ---
 // Despedida.astro
+import Imagen4 from "./Imagen4.astro";
 ---
 
 <section id="despedida" class="relative w-full pt-4 pb-32 px-8 text-center overflow-hidden isolate">
 
-    <!-- RACIMO DECORATIVO IZQUIERDA -->
-    <img
-        src="/imagenes/uva2.png"
-        alt=""
-        aria-hidden="true"
-        class="absolute top-1/2 left-0 w-12 pointer-events-none select-none -translate-y-1/2 z-[-1]"
-    />
-
     <!-- BOTELLA — ESQUINA INFERIOR IZQUIERDA -->
     <img
-        src="/imagenes/vino.png"
+        src="/imagenes/vino.webp"
         alt=""
         aria-hidden="true"
-        class="absolute bottom-0 left-0 w-24 pointer-events-none select-none z-[-1]"
+        width="420"
+        height="530"
+        loading="lazy"
+        decoding="async"
+        class="absolute bottom-0 left-0 w-44 pointer-events-none select-none z-[-1]"
     />
 
     <!-- COPA — ESQUINA INFERIOR DERECHA -->
     <img
-        src="/imagenes/copa2.png"
+        src="/imagenes/copa2.webp"
         alt=""
         aria-hidden="true"
+        width="351"
+        height="440"
+        loading="lazy"
+        decoding="async"
         class="absolute bottom-0 right-0 w-24 pointer-events-none select-none scale-x-[-1] z-[-1]"
     />
 
     <div class="relative z-10">
     <!-- SEPARADOR IMAGEN -->
     <img
-        src="/imagenes/separadoruva.png"
+        src="/imagenes/separadoruva.webp"
         alt=""
         aria-hidden="true"
+        width="640"
+        height="171"
+        loading="lazy"
+        decoding="async"
         class="mx-auto mb-8 w-56 select-none pointer-events-none"
     />
 
     <!-- ═══ MOVILIDAD ═══ -->
+    <div class="relative max-w-md mx-auto mb-10">
+        <!-- RAMO SOBRE LA ESQUINA SUPERIOR IZQUIERDA -->
+        <img
+            src="/imagenes/flrocard.webp"
+            alt=""
+            aria-hidden="true"
+            width="165"
+            height="328"
+            loading="lazy"
+            decoding="async"
+            class="absolute -top-6 -left-12 w-20 sm:w-24 pointer-events-none select-none z-20"
+        />
+
+        <!-- RAMO SOBRE LA ESQUINA INFERIOR DERECHA (girado 180°) -->
+        <img
+            src="/imagenes/flrocard.webp"
+            alt=""
+            aria-hidden="true"
+            width="165"
+            height="328"
+            loading="lazy"
+            decoding="async"
+            class="absolute -bottom-6 -right-12 w-20 sm:w-24 pointer-events-none select-none rotate-180 z-20"
+        />
+
     <div
         id="card-movilidad"
-        class="relative border border-[#6E1B2B]/60 rounded-3xl p-7 sm:p-8 bg-white shadow-lg text-center overflow-hidden max-w-md mx-auto mb-10"
+        class="relative border border-[#6E1B2B]/60 rounded-3xl p-7 sm:p-8 bg-white shadow-lg text-center overflow-hidden"
     >
         <!-- Borde interior fino -->
         <span
@@ -75,14 +105,14 @@
 
             <!-- TEXTO -->
             <p
-                class="font-cormorant text-lg text-[#5E1A26] leading-relaxed max-w-xs mx-auto"
+                class="font-cormorant text-xl text-[#3B0A14] leading-relaxed max-w-xs mx-auto"
             >
                 Para su comodidad, al finalizar la ceremonia religiosa
                 contaremos con movilidades que trasladarán a nuestros invitados
                 desde la iglesia hasta el salón de eventos.
             </p>
             <p
-                class="font-cormorant text-lg text-[#5E1A26] leading-relaxed max-w-xs mx-auto mt-4"
+                class="font-cormorant text-xl text-[#3B0A14] leading-relaxed max-w-xs mx-auto mt-4"
             >
                 Quienes deseen podrán hacer uso de este servicio, o bien
                 trasladarse en su vehículo particular, ya que el salón cuenta
@@ -93,64 +123,112 @@
             <span class="filete-oro w-24 mx-auto mt-6 mb-4"></span>
 
             <p
-                class="font-cormorant text-lg text-[#6E1B2B] leading-relaxed max-w-xs mx-auto"
+                class="font-cormorant text-xl text-[#3B0A14] leading-relaxed max-w-xs mx-auto"
             >
                 ¡Los esperamos para continuar juntos esta celebración tan
                 especial! 🤍
             </p>
         </div>
     </div>
+    </div>
 
-    <!-- TEXTO DE DESPEDIDA -->
-    <p
-        class="font-cormorant text-xl text-[#5E1A26] leading-[1.85] max-w-xs mx-auto px-6"
-    >
-        Gracias por acompañarnos en el día más especial de nuestra historia. Su
-        compañía en este día es el mayor regalo que podemos recibir. Gracias por
-        sus oraciones, su cariño y por ser parte de nuestro camino. Estamos
-        agradecidos con Dios por permitirnos celebrar este momento con ustedes,
-        nuestra familia y amigos más queridos.
-    </p>
+    <!-- FOTO DEBAJO DE LA CARD DE MOVILIDAD -->
+    <Imagen4 />
 
-    <!-- CON TODO NUESTRO AMOR -->
-    <p class="font-upcil uppercase text-2xl text-[#6E1B2B] mt-8">
-        Con todo nuestro amor
-    </p>
+    <!-- CIERRE: separador + texto + firma (se revela como un bloque) -->
+    <div id="cierre-despedida">
+        <!-- SEPARADOR SOBRE EL TEXTO DE DESPEDIDA -->
+        <img
+            src="/imagenes/separadoruva.webp"
+            alt=""
+            aria-hidden="true"
+            width="640"
+            height="171"
+            loading="lazy"
+            decoding="async"
+            class="mx-auto mb-5 w-56 select-none pointer-events-none"
+        />
 
-    <!-- NOMBRES -->
-    <!-- NOMBRES (mismo estilo que NombresFlores.astro) -->
-    <h2
-        class="font-romantic mt-3 leading-[1.45] dorado-solido"
-        style="font-size: clamp(2.1rem, 9.5vw, 3.1rem);"
-    >
-        Omar
-        <span class="block font-romantic my-2" style="font-size: 0.62em;">y</span>
-        Andrea
-    </h2>
+        <!-- TEXTO DE DESPEDIDA -->
+        <div class="relative">
+            <!-- LATERAL DECORATIVO IZQUIERDA -->
+            <img
+                src="/imagenes/lateral2.webp"
+                alt=""
+                aria-hidden="true"
+                width="220"
+                height="950"
+                loading="lazy"
+                decoding="async"
+                class="absolute top-1/2 -left-8 w-12 pointer-events-none select-none -translate-y-1/2 z-[-1]"
+            />
+
+            <!-- LATERAL DECORATIVO DERECHA (espejo) -->
+            <img
+                src="/imagenes/lateral2.webp"
+                alt=""
+                aria-hidden="true"
+                width="220"
+                height="950"
+                loading="lazy"
+                decoding="async"
+                class="absolute top-1/2 -right-8 w-12 pointer-events-none select-none scale-x-[-1] -translate-y-1/2 z-[-1]"
+            />
+
+            <p
+                class="font-cormorant text-xl text-[#3B0A14] leading-[1.85] max-w-xs mx-auto px-6"
+            >
+                Gracias por acompañarnos en el día más especial de nuestra
+                historia. Su compañía en este día es el mayor regalo que podemos
+                recibir. Gracias por sus oraciones, su cariño y por ser parte de
+                nuestro camino. Estamos agradecidos con Dios por permitirnos
+                celebrar este momento con ustedes, nuestra familia y amigos más
+                queridos.
+            </p>
+        </div>
+
+        <!-- CON TODO NUESTRO AMOR -->
+        <p class="font-upcil uppercase text-2xl text-[#3B0A14] mt-8">
+            Con todo nuestro amor
+        </p>
+
+        <!-- NOMBRES (mismo estilo que NombresFlores.astro) -->
+        <h2
+            class="font-romantic mt-3 leading-[1.45] dorado-solido"
+            style="font-size: clamp(2.45rem, 11vw, 3.6rem);"
+        >
+            Omar
+            <span class="block font-romantic my-2" style="font-size: 0.62em;"
+                >y</span
+            >
+            Andrea
+        </h2>
+    </div>
     </div>
 </section>
 
 <script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import { revelar } from "../scripts/animaciones";
 
-    gsap.registerPlugin(ScrollTrigger);
+    /*
+        Se anima la tarjeta de movilidad, no la sección entera. #despedida mide
+        varias pantallas (tarjeta + foto a sangre + textos + firma) y fundirla
+        de golpe obligaba a componer esa superficie completa; además chocaba con
+        la animación propia de Imagen4, que vive dentro.
+    */
+    revelar(
+        "#card-movilidad",
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 1.1 },
+        "#card-movilidad",
+        "top 85%",
+    );
 
-    document.addEventListener("DOMContentLoaded", () => {
-        gsap.fromTo(
-            "#despedida",
-            { opacity: 0, y: 28 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 1.4,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: "#despedida",
-                    start: "top 82%",
-                    toggleActions: "play none none reset",
-                },
-            },
-        );
-    });
+    revelar(
+        "#cierre-despedida",
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 1.1 },
+        "#cierre-despedida",
+        "top 88%",
+    );
 </script>

@@ -8,16 +8,20 @@
 >
     <!-- DECORACIÓN VINO (izquierda) -->
     <img
-        src="/imagenes/vino.png"
+        src="/imagenes/vino.webp"
         alt=""
         aria-hidden="true"
+        width="420"
+        height="530"
+        loading="lazy"
+        decoding="async"
         class="absolute -bottom-4 left-0 w-32 pointer-events-none select-none z-[-1]"
     />
 
     <p
         id="texto-dedicatoria"
-        class="font-cormorant italic text-center text-xl leading-[1.9] max-w-xs relative z-10"
-        style="color: #5E1A26;"
+        class="font-cormorant italic text-center text-2xl leading-[1.45] max-w-xs relative z-10"
+        style="color: #3B0A14;"
     >
         «Más valen dos que uno, porque obtienen más fruto de su esfuerzo. Si
         caen, el uno levanta al otro.»
@@ -30,26 +34,13 @@
 </section>
 
 <script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import { revelar } from "../scripts/animaciones";
 
-    gsap.registerPlugin(ScrollTrigger);
-
-    document.addEventListener("DOMContentLoaded", () => {
-        gsap.fromTo(
-            "#texto-dedicatoria",
-            { opacity: 0, y: 32 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 1.4,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: "#dedicatoria",
-                    start: "top 82%",
-                    toggleActions: "play none none reset",
-                },
-            },
-        );
-    });
+    revelar(
+        "#texto-dedicatoria",
+        { opacity: 0, y: 32 },
+        { opacity: 1, y: 0, duration: 1.4 },
+        "#dedicatoria",
+        "top 82%",
+    );
 </script>

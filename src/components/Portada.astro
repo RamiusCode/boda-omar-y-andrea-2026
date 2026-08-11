@@ -78,88 +78,94 @@
 </section>
 
 <script>
-    import { gsap } from "gsap";
+    import { gsap } from "../scripts/animaciones";
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const btnSello = document.getElementById("btn-sello");
-        const portada = document.getElementById("portada-sobre");
+    const btnSello = document.getElementById("btn-sello");
+    const portada = document.getElementById("portada-sobre");
 
-        // Entrada del sello con efecto elástico
-        gsap.from("#btn-sello", {
-            scale: 0.8,
-            duration: 1.5,
-            ease: "elastic.out(1, 0.5)",
-            delay: 0.5,
+    // Entrada del sello con efecto elástico
+    gsap.from("#btn-sello", {
+        scale: 0.8,
+        duration: 1.5,
+        ease: "elastic.out(1, 0.5)",
+        delay: 0.5,
+    });
+
+    // Respiración continua del sello
+    const respiracion = gsap.to("#btn-sello", {
+        scale: 1.05,
+        duration: 2.5,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+    });
+
+    // Entrada suave del texto inferior
+    gsap.from("#texto-portada", {
+        opacity: 0,
+        y: 18,
+        duration: 1.2,
+        ease: "power2.out",
+        delay: 0.4,
+    });
+
+    // Entrada del texto superior ¡Nos Casamos!
+    gsap.from("#texto-superior", {
+        opacity: 0,
+        y: -16,
+        duration: 1.2,
+        ease: "power2.out",
+        delay: 0.3,
+    });
+
+    btnSello?.addEventListener("click", () => {
+        const audio = new Audio("/musica/melodia.mp3");
+        audio.loop = true;
+        audio.volume = 0.5;
+        audio.play().catch(() => {
+            /* el navegador puede bloquear el audio; no es un fallo */
         });
 
-        // Respiración continua del sello
-        gsap.to("#btn-sello", {
-            scale: 1.05,
-            duration: 2.5,
-            ease: "sine.inOut",
-            yoyo: true,
-            repeat: -1,
-        });
+        (window as any).audioGlobal = audio;
+        (window as any).estaReproduciendoGlobal = true;
 
-        // Entrada suave del texto inferior
-        gsap.from("#texto-portada", {
+        const iconoPlay = document.getElementById("icono-play");
+        const iconoPause = document.getElementById("icono-pause");
+        iconoPlay?.classList.add("hidden");
+        iconoPause?.classList.remove("hidden");
+
+        gsap.to(portada, {
             opacity: 0,
-            y: 18,
-            duration: 1.2,
+            duration: 0.8,
             ease: "power2.out",
-            delay: 0.4,
-        });
-
-        // Entrada del texto superior ¡Nos Casamos!
-        gsap.from("#texto-superior", {
-            opacity: 0,
-            y: -16,
-            duration: 1.2,
-            ease: "power2.out",
-            delay: 0.3,
-        });
-
-        btnSello?.addEventListener("click", () => {
-            const audio = new Audio("/musica/melodia.mp3");
-            audio.loop = true;
-            audio.volume = 0.5;
-            audio.play().catch((error: any) => {
-                console.log("Error al reproducir audio:", error);
-            });
-
-            (window as any).audioGlobal = audio;
-            (window as any).estaReproduciendoGlobal = true;
-
-            setTimeout(() => {
-                const iconoPlay = document.getElementById("icono-play");
-                const iconoPause = document.getElementById("icono-pause");
-
-                if (iconoPlay && iconoPause) {
-                    iconoPlay.classList.add("hidden");
-                    iconoPause.classList.remove("hidden");
-                }
-            }, 100);
-
-            gsap.to(portada, {
-                opacity: 0,
-                duration: 0.8,
-                ease: "power2.out",
-                onStart: () => {
-                    document.body.style.overflow = "auto";
-                },
-                onComplete: () => {
-                    portada?.remove();
-                },
-            });
+            onStart: () => {
+                document.body.style.overflow = "auto";
+            },
+            onComplete: () => {
+                /*
+                    La respiración del sello es un `repeat: -1`. Sin matarla,
+                    GSAP seguía calculándola en cada cuadro sobre un elemento ya
+                    borrado durante TODA la visita, robando tiempo al scroll.
+                */
+                respiracion.kill();
+                portada?.remove();
+            },
         });
     });
 </script>
 
-<style>
+<style is:global>
+    /*
+        `is:global` porque Astro limita los estilos al componente y <body> vive
+        fuera de él: sin esto la regla no se aplicaba y la página se podía
+        desplazar por detrás de la portada. El JS la libera al abrir el sobre.
+    */
     body {
         overflow: hidden;
     }
+</style>
 
+<style>
     /* Dorado plano — sobre el sobre vino va un tono más claro */
     .texto-dorado {
         color: #d4b473;

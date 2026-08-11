@@ -1,0 +1,246 @@
+---
+// Fecha.astro
+---
+
+<section
+    id="fecha-boda"
+    class="relative w-full pt-2 pb-12 px-6 text-center overflow-hidden isolate"
+>
+    <!-- HOJA DECORATIVA FONDO -->
+    <img
+        src="/imagenes/textura2.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute bottom-4 left-0 w-52 pointer-events-none select-none opacity-[0.06]"
+    />
+
+    <!-- RACIMO DECORATIVO IZQUIERDA -->
+    <img
+        src="/imagenes/uva2.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute top-[52%] left-0 w-14 pointer-events-none select-none z-20"
+    />
+
+    <!-- SEPARADOR DE UVAS -->
+    <img
+        src="/imagenes/separadoruva.png"
+        alt=""
+        aria-hidden="true"
+        class="w-56 h-auto mx-auto mb-6 select-none pointer-events-none"
+    />
+
+    <!-- FRASE SUPERIOR (dorado) -->
+    <p class="font-upcil uppercase text-2xl leading-[1.1] titulo-dorado">
+        Queremos que nos<br />acompañes en nuestro día
+    </p>
+
+    <!--
+        BLOQUE DE FECHA
+        Rejilla de 3 columnas iguales: el número siempre queda centrado,
+        sin importar cuánto midan los textos de los costados.
+    -->
+    <div class="mt-8 mx-auto max-w-[21rem] px-2">
+        <!-- MES Y AÑO -->
+        <p
+            class="font-cormorant uppercase tracking-[0.3em] text-lg text-[#6E1B2B] mb-3"
+        >
+            Septiembre 2026
+        </p>
+
+        <!-- Filete superior -->
+        <div class="h-px w-full bg-[#B08A3C]"></div>
+
+        <!-- DÍA · NÚMERO · HORA -->
+        <div class="grid grid-cols-3 items-center py-4">
+            <div class="px-1">
+                <p
+                    class="font-cormorant uppercase tracking-[0.1em] text-xl text-[#5E1A26] leading-tight"
+                >
+                    Sábado
+                </p>
+            </div>
+
+            <div class="px-2 border-x border-[#B08A3C]/45">
+                <p class="font-charm font-bold text-6xl leading-none titulo-dorado">
+                    12
+                </p>
+            </div>
+
+            <div class="px-1">
+                <p
+                    class="font-cormorant uppercase tracking-[0.1em] text-xl text-[#5E1A26] leading-tight"
+                >
+                    16:00
+                </p>
+                <p
+                    class="font-cormorant uppercase tracking-[0.1em] text-sm text-[#8E2334] mt-0.5"
+                >
+                    Horas
+                </p>
+            </div>
+        </div>
+
+        <!-- Filete inferior -->
+        <div class="h-px w-full bg-[#B08A3C]"></div>
+    </div>
+
+    <!-- ICONO CALENDARIO CON CORAZÓN -->
+    <div class="flex justify-center mt-6">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 42 42"
+            fill="none"
+            class="w-10 h-10"
+        >
+            <rect
+                x="3"
+                y="8"
+                width="36"
+                height="30"
+                rx="5"
+                stroke="#B98A93"
+                stroke-width="1.4"></rect>
+            <line
+                x1="3"
+                y1="17"
+                x2="39"
+                y2="17"
+                stroke="#B98A93"
+                stroke-width="1.4"></line>
+            <line
+                x1="13"
+                y1="3"
+                x2="13"
+                y2="12"
+                stroke="#B98A93"
+                stroke-width="1.6"
+                stroke-linecap="round"></line>
+            <line
+                x1="29"
+                y1="3"
+                x2="29"
+                y2="12"
+                stroke="#B98A93"
+                stroke-width="1.6"
+                stroke-linecap="round"></line>
+            <path
+                d="M21 31 C21 31 14.5 26.8 14.5 23 C14.5 21.1 16 20 17.8 20 C19.2 20 20.3 20.8 21 22 C21.7 20.8 22.8 20 24.2 20 C26 20 27.5 21.1 27.5 23 C27.5 26.8 21 31 21 31Z"
+                fill="#B08A3C"></path>
+        </svg>
+    </div>
+
+    <!-- ESPACIO antes de Faltan -->
+    <div class="mt-10"></div>
+
+    <!-- FALTAN -->
+    <p class="font-romantic text-4xl leading-none titulo-dorado">Faltan</p>
+
+    <!-- CARD DEL CONTADOR -->
+    <div
+        class="mt-5 mx-2 bg-white/80 rounded-2xl py-5 px-4 shadow-sm border border-[#E8D5D5]"
+    >
+        <div class="flex justify-around">
+            <div class="flex flex-col items-center">
+                <span
+                    id="countdown-days"
+                    class="font-charm font-bold text-4xl text-[#8E2334] leading-none"
+                    >00</span
+                >
+                <span class="font-cormorant text-base text-[#6E1B2B] mt-1"
+                    >Días</span
+                >
+            </div>
+
+            <div class="flex flex-col items-center">
+                <span
+                    id="countdown-hours"
+                    class="font-charm font-bold text-4xl text-[#8E2334] leading-none"
+                    >00</span
+                >
+                <span class="font-cormorant text-sm text-[#6E1B2B] mt-1"
+                    >Hrs.</span
+                >
+            </div>
+
+            <div class="flex flex-col items-center">
+                <span
+                    id="countdown-minutes"
+                    class="font-charm font-bold text-4xl text-[#8E2334] leading-none"
+                    >00</span
+                >
+                <span class="font-cormorant text-sm text-[#6E1B2B] mt-1"
+                    >Min.</span
+                >
+            </div>
+
+            <div class="flex flex-col items-center">
+                <span
+                    id="countdown-seconds"
+                    class="font-charm font-bold text-4xl text-[#8E2334] leading-none"
+                    >00</span
+                >
+                <span class="font-cormorant text-sm text-[#6E1B2B] mt-1"
+                    >S.</span
+                >
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ── FECHA DE LA BODA (ajustar aquí) ──────
+    const FECHA_BODA = new Date("2026-09-12T16:00:00");
+    // ──────────────────────────────────────────
+
+    function pad(n: number): string {
+        return String(n).padStart(2, "0");
+    }
+
+    function actualizar() {
+        const diff = FECHA_BODA.getTime() - Date.now();
+
+        const dEl = document.getElementById("countdown-days");
+        const hEl = document.getElementById("countdown-hours");
+        const mEl = document.getElementById("countdown-minutes");
+        const sEl = document.getElementById("countdown-seconds");
+
+        if (diff <= 0) {
+            [dEl, hEl, mEl, sEl].forEach((el) => {
+                if (el) el.textContent = "00";
+            });
+            return;
+        }
+
+        if (dEl) dEl.textContent = pad(Math.floor(diff / 86400000));
+        if (hEl) hEl.textContent = pad(Math.floor((diff % 86400000) / 3600000));
+        if (mEl) mEl.textContent = pad(Math.floor((diff % 3600000) / 60000));
+        if (sEl) sEl.textContent = pad(Math.floor((diff % 60000) / 1000));
+    }
+
+    actualizar();
+    setInterval(actualizar, 1000);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        gsap.fromTo(
+            "#fecha-boda",
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1.3,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#fecha-boda",
+                    start: "top 82%",
+                    toggleActions: "play none none reset",
+                },
+            },
+        );
+    });
+</script>

@@ -1,0 +1,82 @@
+---
+// Confirmar.astro
+---
+
+<section id="confirmar" class="relative w-full pt-2 pb-6 px-6 text-center overflow-hidden isolate">
+
+    <!-- RACIMO DECORATIVO DERECHA -->
+    <img
+        src="/imagenes/uva2.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute top-1/2 right-0 w-12 pointer-events-none select-none scale-x-[-1] -translate-y-1/2 z-[-1]"
+    />
+    <!-- SEPARADOR -->
+    <img
+        src="/imagenes/separadoruva.png"
+        alt=""
+        aria-hidden="true"
+        class="mx-auto mb-7 w-56 select-none pointer-events-none"
+    />
+
+    <!-- TÍTULO -->
+    <p class="font-romantic text-3xl leading-snug titulo-dorado">
+        Confirmar Asistencia
+    </p>
+
+    <!-- TEXTO -->
+    <p
+        class="font-cormorant text-xl text-[#5E1A26] mt-4 leading-relaxed max-w-xs mx-auto px-8"
+    >
+        Tu presencia es muy importante para nosotros. <br />Por favor,
+        confírmanos tu asistencia.
+    </p>
+
+    <!-- BOTONES WHATSAPP -->
+    <div class="flex flex-col items-center gap-3 mt-8">
+        <!-- Confirmar con la Wedding Planner -->
+        <a
+            href="https://wa.me/59178762918?text=Me%20complace%20confirmar%20mi%20asistencia%20a%20la%20boda%20de%20Omar%20y%20Andrea.%20Nos%20vemos%20el%20s%C3%A1bado%2012%20de%20septiembre.%20%C2%A1Estar%C3%A9%20sin%20falta!"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group relative w-full max-w-xs inline-block py-3 px-6 rounded-full font-cormorant uppercase text-sm tracking-widest text-white bg-[#6E1B2B] shadow-md hover:bg-[#4E1220] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+        >
+            <span
+                class="pointer-events-none absolute inset-1.5 rounded-full border border-[#D4B473]/60 transition-all duration-300 group-hover:inset-[7px]"
+            ></span>
+            <span class="relative">Confirmar mi asistencia</span>
+        </a>
+
+        <p
+            class="font-cormorant text-lg text-[#5E1A26] mt-1 leading-snug"
+        >
+            Wedding planner ·
+            <span class="texto-oro font-semibold">+591 78762918</span>
+        </p>
+    </div>
+
+    <script>
+        import { gsap } from "gsap";
+        import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.fromTo(
+                "#confirmar",
+                { opacity: 0, y: 28 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.3,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: "#confirmar",
+                        start: "top 82%",
+                        toggleActions: "play none none reset",
+                    },
+                },
+            );
+        });
+    </script>
+</section>

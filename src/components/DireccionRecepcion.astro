@@ -6,15 +6,31 @@
     id="direccion-recepcion"
     class="relative w-full py-6 px-6 overflow-hidden isolate"
 >
-    <!-- FLOR DECORATIVA DERECHA -->
-    <img
-        src="/imagenes/florcostado.png"
-        alt=""
-        aria-hidden="true"
-        class="absolute top-1/2 left-0 w-24 pointer-events-none select-none -translate-y-1/2 z-[-1]"
-    />
-
     <div class="relative z-10 max-w-md mx-auto">
+        <!-- RAMO SOBRE LA ESQUINA SUPERIOR IZQUIERDA -->
+        <img
+            src="/imagenes/flrocard.webp"
+            alt=""
+            aria-hidden="true"
+            width="165"
+            height="328"
+            loading="lazy"
+            decoding="async"
+            class="absolute -top-6 -left-12 w-20 sm:w-24 pointer-events-none select-none z-20"
+        />
+
+        <!-- RAMO SOBRE LA ESQUINA INFERIOR DERECHA (girado 180°) -->
+        <img
+            src="/imagenes/flrocard.webp"
+            alt=""
+            aria-hidden="true"
+            width="165"
+            height="328"
+            loading="lazy"
+            decoding="async"
+            class="absolute -bottom-6 -right-12 w-20 sm:w-24 pointer-events-none select-none rotate-180 z-20"
+        />
+
         <!-- TARJETA CON BORDE REDONDEADO -->
         <div
             id="recepcion-card"
@@ -64,26 +80,28 @@
                 <!-- NOMBRE DEL SALÓN -->
                 <div id="recepcion-nombre" class="mb-5">
                     <p
-                        class="font-cormorant font-bold text-[#6E1B2B] text-xl tracking-normal leading-snug uppercase"
+                        class="font-cormorant font-bold text-[#3B0A14] text-2xl tracking-normal leading-snug uppercase"
                     >
-                        La Casa Campestre de la SIB
+                        Casa Campestre de la SIB
+                       
                     </p>
                     <p
-                        class="font-cormorant text-[#5E1A26] text-lg leading-snug mt-2 px-2"
+                        class="font-cormorant text-[#3B0A14] text-xl leading-snug mt-2 px-2"
                     >
-                        Zona Piñami, Capinota, Vinto, Quillacollo
+                        Av. La Floresta, 3 cuadras al Oeste de la<br />Av.
+                        Reducto, Tiquipaya, Cochabamba
                     </p>
                 </div>
 
                 <!-- HORA -->
                 <div id="recepcion-hora" class="mb-6">
                     <p
-                        class="font-cormorant text-sm sm:text-base md:text-lg text-[#8E2334] uppercase tracking-[0.25em] mb-2"
+                        class="font-cormorant text-base sm:text-lg md:text-xl text-[#3B0A14] uppercase tracking-[0.25em] mb-2"
                     >
                         Hora
                     </p>
                     <p
-                        class="font-charm font-bold text-[#6E1B2B] text-[clamp(1.35rem,5.5vw,1.8rem)] tracking-wide leading-none"
+                        class="font-charm font-bold text-[#3B0A14] text-[clamp(1.35rem,5.5vw,1.8rem)] tracking-wide leading-none"
                     >
                         17:30
                     </p>
@@ -95,7 +113,7 @@
                         href="https://maps.app.goo.gl/SXWHrBW8bGYdDJ9U6"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="group relative inline-block bg-[#6E1B2B] text-white px-9 py-3 rounded-full text-sm font-cormorant uppercase tracking-widest hover:bg-[#4E1220] transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                        class="group relative inline-block bg-[#6E1B2B] text-white px-9 py-3 rounded-full text-base font-cormorant uppercase tracking-widest hover:bg-[#4E1220] transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
                     >
                         <span
                             class="pointer-events-none absolute inset-1.5 rounded-full border border-[#D4B473]/60 transition-all duration-300 group-hover:inset-[7px]"
@@ -126,120 +144,60 @@
 <!-- 🎬 ANIMACIONES CON GSAP                                     -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 <script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import { secuencia } from "../scripts/animaciones";
 
-    gsap.registerPlugin(ScrollTrigger);
+    /*
+        Misma estructura que la ceremonia: una línea de tiempo con un solo
+        disparador, sin escalar la tarjeta (evita redibujar sombra y bordes
+        redondeados en cada cuadro).
+    */
+    const tl = secuencia("#recepcion-card", "top 85%");
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const st = {
-            trigger: "#recepcion-card",
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-        };
-
-        // ═══ TARJETA PRINCIPAL ═══
-        gsap.fromTo(
-            "#recepcion-card",
-            { opacity: 0, scale: 0.8, y: 50 },
-            {
-                opacity: 1,
-                scale: 1,
-                y: 0,
-                duration: 1,
-                ease: "back.out(1.4)",
-                scrollTrigger: st,
-            },
-        );
-
-        // ═══ TÍTULO ═══
-        gsap.fromTo(
+    tl.fromTo(
+        "#recepcion-card",
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 0.9 },
+    )
+        .fromTo(
             "#recepcion-titulo",
-            { opacity: 0, y: -20 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                ease: "power2.out",
-                scrollTrigger: st,
-                delay: 0.3,
-            },
-        );
-
-        // ═══ ICONO ═══
-        gsap.fromTo(
+            { opacity: 0, y: -16 },
+            { opacity: 1, y: 0 },
+            "-=0.55",
+        )
+        .fromTo(
             "#recepcion-icono",
-            { opacity: 0, scale: 0.5, rotation: -10 },
-            {
-                opacity: 1,
-                scale: 1,
-                rotation: 0,
-                duration: 0.8,
-                ease: "back.out(1.7)",
-                scrollTrigger: st,
-                delay: 0.6,
-            },
-        );
-
-        // ═══ NOMBRE DEL SALÓN ═══
-        gsap.fromTo(
+            { opacity: 0, y: 12 },
+            { opacity: 1, y: 0, duration: 0.5 },
+            "-=0.4",
+        )
+        .fromTo(
             "#recepcion-nombre",
-            { opacity: 0, y: 20 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                ease: "power2.out",
-                scrollTrigger: st,
-                delay: 0.9,
-            },
-        );
-
-        // ═══ HORA ═══
-        gsap.fromTo(
+            { opacity: 0, y: 16 },
+            { opacity: 1, y: 0, duration: 0.5 },
+            "-=0.3",
+        )
+        .fromTo(
             "#recepcion-hora",
-            { opacity: 0, scale: 0.7 },
-            {
-                opacity: 1,
-                scale: 1,
-                duration: 0.8,
-                ease: "back.out(1.5)",
-                scrollTrigger: st,
-                delay: 1.2,
-            },
-        );
-
-        // ═══ BOTÓN "VER UBICACIÓN" ═══
-        gsap.fromTo(
+            { opacity: 0, y: 12 },
+            { opacity: 1, y: 0, duration: 0.5 },
+            "-=0.3",
+        )
+        .fromTo(
             "#recepcion-boton",
-            { opacity: 0, y: 20 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                ease: "power2.out",
-                scrollTrigger: st,
-                delay: 1.5,
-            },
+            { opacity: 0, y: 16 },
+            { opacity: 1, y: 0, duration: 0.5 },
+            "-=0.3",
         );
-    });
 </script>
 
 <style>
-    /* Transiciones suaves en la tarjeta */
+    /* Acotado a la sombra: `transition: all` chocaba con los transform de GSAP */
     #recepcion-card {
-        transition: all 0.3s ease;
+        transition: box-shadow 0.3s ease;
     }
 
     #recepcion-card:hover {
-        transform: translateY(-5px);
         box-shadow: 0 20px 40px rgba(94, 21, 36, 0.18);
-    }
-
-    /* Efecto hover en el título */
-    #recepcion-titulo:hover {
-        transform: scale(1.05);
-        transition: transform 0.3s ease;
     }
 
     /* Animación del botón */

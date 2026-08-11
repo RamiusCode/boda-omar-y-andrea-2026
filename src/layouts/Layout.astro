@@ -16,24 +16,24 @@ const { title } = Astro.props;
     <link rel="icon" type="image/png" href="/iconos/Anillos.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <!-- Google Fonts -->
+    <!--
+      Google Fonts en UNA sola petición.
+      Antes eran 4 <link> que pedían Great Vibes y Crimson Text repetidos;
+      cada uno bloqueaba el pintado hasta resolverse.
+    -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Crimson+Text:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Charm:wght@400;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Primera foto visible: se pide cuanto antes para que no salte el layout -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Crimson+Text:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Crimson+Text:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="image"
+      href="/imagenes/imagen1.webp"
+      fetchpriority="high"
     />
 
     <style>
@@ -67,19 +67,25 @@ const { title } = Astro.props;
         background-color: #ffffff;
       }
 
+      /*
+        Textura de papel.
+        Antes era una capa `absolute` tan alta como TODA la página (varios
+        miles de píxeles) con una imagen repetida al 50% de opacidad: el
+        navegador la tenía que repintar en cada cuadro del scroll.
+        Ahora es una capa fija del tamaño de la pantalla, promovida a su
+        propia capa de GPU: se pinta una vez y ya no vuelve a costar nada.
+      */
       body::before {
         content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url("/imagenes/BlancoTextura.png");
+        position: fixed;
+        inset: 0;
+        background-image: url("/imagenes/BlancoTextura.webp");
         background-repeat: repeat;
-        background-size: contain;
+        background-size: 100% auto;
         opacity: 0.5;
         z-index: 0;
         pointer-events: none;
+        transform: translateZ(0);
       }
 
       main {
