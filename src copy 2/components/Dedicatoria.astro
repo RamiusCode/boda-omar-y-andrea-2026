@@ -1,0 +1,46 @@
+---
+// Dedicatoria.astro
+---
+
+<section
+    id="dedicatoria"
+    class="relative w-full pt-2 pb-10 px-8 flex justify-center isolate"
+>
+    <!-- DECORACIÓN VINO (izquierda) -->
+    <img
+        src="/imagenes/vino.webp"
+        alt=""
+        aria-hidden="true"
+        width="420"
+        height="530"
+        loading="lazy"
+        decoding="async"
+        class="absolute -bottom-4 left-0 w-32 pointer-events-none select-none z-[-1]"
+    />
+
+    <p
+        id="texto-dedicatoria"
+        class="font-cormorant italic text-center text-2xl leading-[1.45] max-w-xs relative z-10"
+        style="color: #3B0A14;"
+    >
+        «Más valen dos que uno, porque obtienen más fruto de su esfuerzo. Si
+        caen, el uno levanta al otro.»
+        <span
+            class="block not-italic font-upcil text-3xl tracking-normal mt-5 texto-oro"
+        >
+            Eclesiastés 4:9-10
+        </span>
+    </p>
+</section>
+
+<script>
+    import { revelar } from "../scripts/animaciones";
+
+    revelar(
+        "#texto-dedicatoria",
+        { opacity: 0, y: 32 },
+        { opacity: 1, y: 0, duration: 1.4 },
+        "#dedicatoria",
+        "top 82%",
+    );
+</script>

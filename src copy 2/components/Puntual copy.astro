@@ -1,0 +1,57 @@
+---
+// Puntual.astro
+---
+
+<section id="puntual" class="relative w-full py-10 px-6">
+    <div
+        id="card-puntual"
+        class="bg-white rounded-3xl shadow-md px-4 py-8 text-center max-w-xs mx-auto border border-[#E8D5D5]"
+    >
+        <!-- ICONO RELOJ -->
+        <img
+            src="/imagenes/hora.png"
+            alt="Puntualidad"
+            class="w-12 h-12 mx-auto icono-vino"
+        />
+
+        <!-- TEXTO -->
+        <p
+            class="font-cormorant italic text-xl text-[#5E1A26] mt-5 leading-relaxed"
+        >
+            La celebración comenzará puntual., y queremos que disfrutes con
+            nosotros de cada detalle. <br /> ¡Te agradeceríamos que llegues a tiempo!
+        </p>
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        gsap.fromTo(
+            "#card-puntual",
+            { opacity: 0, y: 28 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#puntual",
+                    start: "top 82%",
+                    toggleActions: "play none none reset",
+                },
+            },
+        );
+    });
+</script>
+
+<style>
+    .icono-vino {
+        filter: brightness(0) saturate(100%) invert(13%) sepia(94%)
+            saturate(1565%) hue-rotate(324deg) brightness(92%) contrast(95%);
+    }
+</style>

@@ -1,0 +1,49 @@
+---
+// src/pages/index.astro
+import Layout from "../layouts/Layout.astro";
+
+import Portada from "../components/Portada.astro";
+import NombresFlores from "../components/NombresFlores.astro";
+import Dedicatoria from "../components/Dedicatoria.astro";
+import NombresPadres from "../components/NombresPadres.astro";
+import Fecha from "../components/Fecha.astro";
+import Imagen1 from "../components/Imagen1.astro";
+import Imagen3 from "../components/Imagen3.astro";
+import DireccionCeremonia from "../components/DireccionCeremonia.astro";
+import DireccionRecepcion from "../components/DireccionRecepcion.astro";
+import Movilidad from "../components/Movilidad.astro";
+import Itinerario from "../components/Itinerario.astro";
+import Puntual from "../components/Puntual.astro";
+import CodigoVestimenta from "../components/CodigoVestimenta.astro";
+import SugerenciaRegalos from "../components/SugerenciaRegalos.astro";
+import Despedida from "../components/Despedida.astro";
+import FotoFinal from "../components/FotoFinal.astro";
+import Confirmar from "../components/Confirmar.astro";
+import Pase from "../components/Pase.astro";
+import GaleriaFotos from "../components/GaleriaFotos.astro";
+---
+
+<Layout title="Omar & Andrea | Nuestra Boda">
+    <Portada />
+    <NombresFlores />
+    <Dedicatoria />
+    
+    <NombresPadres />
+    <Fecha />
+    <Imagen1 />
+    <DireccionCeremonia />
+    <Movilidad />
+    <DireccionRecepcion />
+    <!-- <Itinerario /> -->
+     <Imagen3 />
+    <Puntual />
+    
+    <CodigoVestimenta />
+    <!-- <SugerenciaRegalos /> -->
+    <!-- <GaleriaFotos /> -->
+     <Pase pases={1} />
+    <Confirmar />
+    <Despedida />
+
+    <!-- <FotoFinal /> -->
+</Layout>

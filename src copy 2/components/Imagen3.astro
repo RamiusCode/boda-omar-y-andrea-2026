@@ -1,13 +1,13 @@
 ---
-// Imagen1.astro
+// Imagen3.astro
 ---
 
-<section id="imagen1" class="w-full flex justify-center overflow-hidden my-14">
+<section id="imagen3" class="w-full flex justify-center overflow-hidden my-14">
     <img
-        id="imagen1-img"
-        src="/imagenes/imagen2.webp"
+        id="imagen3-img"
+        src="/imagenes/imagen3.webp"
         alt="Omar y Andrea"
-        width="969"
+        width="972"
         height="1280"
         loading="lazy"
         decoding="async"
@@ -21,10 +21,10 @@
     // Zoom suave: la foto entra ligeramente ampliada y se asienta
     // en su tamaño real mientras aparece.
     revelar(
-        "#imagen1-img",
-        { opacity: 0, scale: 1.16 },
-        { opacity: 1, scale: 1, duration: 1.9, ease: "power3.out" },
-        "#imagen1",
-        "top 92%",
+        "#imagen3-img",
+        { opacity: 0, scale: 1.08 },
+        { opacity: 1, scale: 1, duration: 1.4, ease: "power3.out" },
+        "#imagen3",
+        "top 88%",
     );
 </script>

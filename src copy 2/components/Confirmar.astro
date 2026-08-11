@@ -1,0 +1,93 @@
+---
+// Confirmar.astro
+---
+
+<section id="confirmar" class="relative w-full pt-16 pb-6 px-6 text-center overflow-hidden isolate">
+
+    <!-- COPA DECORATIVA IZQUIERDA -->
+    <img
+        src="/imagenes/copa2.webp"
+        alt=""
+        aria-hidden="true"
+        width="351"
+        height="440"
+        loading="lazy"
+        decoding="async"
+        class="absolute top-16 left-0 w-14 pointer-events-none select-none z-[-1]"
+    />
+
+    <!-- COPA DECORATIVA DERECHA -->
+    <img
+        src="/imagenes/copa2.webp"
+        alt=""
+        aria-hidden="true"
+        width="351"
+        height="440"
+        loading="lazy"
+        decoding="async"
+        class="absolute top-16 right-0 w-14 pointer-events-none select-none scale-x-[-1] z-[-1]"
+    />
+
+    <!-- SEPARADOR -->
+    <img
+        src="/imagenes/separadoruva.webp"
+        alt=""
+        aria-hidden="true"
+        width="640"
+        height="171"
+        loading="lazy"
+        decoding="async"
+        class="mx-auto mb-5 w-56 select-none pointer-events-none"
+    />
+
+    <!-- TÍTULO -->
+    <p class="font-romantic text-3xl leading-snug titulo-dorado">
+        Confirmar Asistencia
+    </p>
+
+    <!-- TEXTO -->
+    <p
+        class="font-cormorant text-xl text-[#3B0A14] mt-4 leading-relaxed max-w-xs mx-auto px-8"
+    >
+        Tu presencia es muy importante para nosotros. <br />Por favor,
+        confírmanos tu asistencia.
+    </p>
+
+    <!-- BOTÓN DE CONFIRMACIÓN -->
+    <div class="flex flex-col items-center gap-3 mt-8">
+        <!-- Formulario de confirmación -->
+        <a
+            href="https://forms.gle/tnfEMR85vkNRXmuf6"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group relative w-full max-w-xs inline-block py-3 px-6 rounded-full font-cormorant uppercase text-base tracking-widest text-white bg-[#6E1B2B] shadow-md hover:bg-[#4E1220] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+        >
+            <span
+                class="pointer-events-none absolute inset-1.5 rounded-full border border-[#D4B473]/60 transition-all duration-300 group-hover:inset-[7px]"
+            ></span>
+            <span class="relative">Confirmar asistencia</span>
+        </a>
+
+        <!-- <p
+            class="font-cormorant text-xl text-[#3B0A14] mt-2 leading-snug"
+        >
+            Wedding planner
+            <span class="block font-charm font-bold texto-oro text-xl mt-1"
+                >+591 78762918</span
+            >
+        </p> -->
+    </div>
+
+</section>
+
+<script>
+    import { revelar } from "../scripts/animaciones";
+
+    revelar(
+        "#confirmar",
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 1.1 },
+        "#confirmar",
+        "top 85%",
+    );
+</script>

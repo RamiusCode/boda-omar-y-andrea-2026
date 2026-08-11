@@ -1,0 +1,80 @@
+---
+// SugerenciaRegalos.astro
+---
+
+<section
+    id="sugerencia-regalos"
+    class="relative w-full py-10 px-6 text-center overflow-hidden isolate"
+>
+    <!-- LATERAL DECORATIVO IZQUIERDA (pegado al borde) -->
+    <img
+        src="/imagenes/lateral2.webp"
+        alt=""
+        aria-hidden="true"
+        class="absolute top-[58%] left-0 w-12 pointer-events-none select-none -translate-y-1/2 z-[-1]"
+    />
+
+    <!-- LATERAL DECORATIVO DERECHA (espejo, pegado al borde) -->
+    <img
+        src="/imagenes/lateral2.webp"
+        alt=""
+        aria-hidden="true"
+        class="absolute top-[58%] right-0 w-12 pointer-events-none select-none scale-x-[-1] -translate-y-1/2 z-[-1]"
+    />
+    <!-- TÍTULO -->
+    <p class="font-romantic text-3xl leading-snug mb-6 titulo-dorado">
+        Sugerencia de Regalos
+    </p>
+
+    <!-- ICONO REGALO (coloreado en vino con máscara) -->
+    <div
+        role="img"
+        aria-label="Regalo"
+        class="w-16 h-16 mx-auto"
+        style="background-color: #6E1B2B; -webkit-mask: url('/imagenes/regalo.png') center / contain no-repeat; mask: url('/imagenes/regalo.png') center / contain no-repeat;"
+    >
+    </div>
+
+    <!-- TEXTO -->
+    <p
+        class="font-cormorant text-xl text-[#3B0A14] mt-5 leading-relaxed max-w-xs mx-auto"
+    >
+        Su presencia y sus buenos deseos son nuestro mejor regalo. Si desean
+        hacernos llegar algún presente estaremos muy agradecidos. Gracias por tu
+        muestra de cariño.
+    </p>
+
+    <!-- QR CODE -->
+    <div
+        id="qr-card"
+        class="mt-7 mx-auto bg-white rounded-2xl shadow-md p-5 border border-[#E8D5D5] inline-block"
+    >
+        <img src="/imagenes/qr.png" alt="Código QR" class="w-44 h-44 mx-auto" />
+    </div>
+
+    <!-- DATOS DE CUENTA -->
+    <div class="mt-5 flex flex-col items-center gap-1">
+        <p class="font-upcil uppercase text-2xl text-[#3B0A14]">
+            Omar Alexander y Andrea Eugenia
+        </p>
+        <p class="font-cormorant text-xl text-[#3B0A14]">
+            Número de cuenta:
+            <span class="font-cormorant font-semibold texto-oro">0000000</span>
+        </p>
+        <p class="font-cormorant text-xl text-[#3B0A14]">
+            Concepto: Omar y Andrea
+        </p>
+    </div>
+</section>
+
+<script>
+    import { revelar } from "../scripts/animaciones";
+
+    revelar(
+        "#sugerencia-regalos",
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 1.1 },
+        "#sugerencia-regalos",
+        "top 85%",
+    );
+</script>
